@@ -23,5 +23,6 @@ namespace RecipyBotWeb.Constants
     {
         public const string RecipePuppyGet = "http://www.recipepuppy.com/api/";
         public const string RecipePuppyGetWithQuery = "http://www.recipepuppy.com/api/";
+        public const string GifRecipes = "https://www.reddit.com/r/GifRecipes.json";
     }
 }

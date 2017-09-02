@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
+using RecipyBotWeb.Service;
 
 namespace RecipyBotWeb.Controllers
 {
@@ -20,6 +21,12 @@ namespace RecipyBotWeb.Controllers
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
+                if (activity.Text == "gif")
+                {
+                    Activity reply = RecipePuppyService.GetRecipeGif(activity);
+                    await connector.Conversations.ReplyToActivityAsync(reply);
+                }
 
                 if (activity.Text == "thumb")
                 {
@@ -37,8 +44,10 @@ namespace RecipyBotWeb.Controllers
                     // calculate something for us to return
                     int length = (activity.Text ?? string.Empty).Length;
 
+                    Activity reply = BotService.MatchPreDefinedMessage(activity);
+
                     // return our reply to the user
-                    Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                    //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RecipyBotWeb.Service;
 
 namespace RecipyBotWeb.Controllers
 {
@@ -15,8 +16,9 @@ namespace RecipyBotWeb.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            string[] food = new string[]{"abc","def", "ghi"};
+            string foodD = string.Join(",",  food.Select(row => row).ToArray());
+            ViewBag.Message = "Your application description page." + foodD;
             return View();
         }
 
@@ -27,4 +29,7 @@ namespace RecipyBotWeb.Controllers
             return View();
         }
     }
+
+
+  
 }
