@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using RecipyBotWeb.Constants;
 
 namespace RecipyBotWeb.Service
 {
@@ -10,19 +11,13 @@ namespace RecipyBotWeb.Service
         public static IEnumerable<int> GiveXFromYNumbers(int x, int y)
         {
             List<int> rangeSet = new List<int>();
-            for (int i=1; i<=y; i++)
+            for (int i=0; i<y; i++)
             {
                 rangeSet.Add(i);
             }
             Random r = new Random();
-            return rangeSet.Shuffle().Take((x >= y ? 5 : x)); //myValues.OrderBy(x => r.Next()).Take(3);            
+            return rangeSet.Shuffle().Take((x >= y ? BotConstants.OtherConstants.DefaultTopN : x)); //myValues.OrderBy(x => r.Next()).Take(3);            
         }
-
-        public static string GetRandomResponses()
-        {
-            return "";
-        }
-
     }
 
     public static class EnumerableExtensions
@@ -52,4 +47,5 @@ namespace RecipyBotWeb.Service
             }
         }
     }
+
 }

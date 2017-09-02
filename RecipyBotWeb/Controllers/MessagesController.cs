@@ -20,42 +20,14 @@ namespace RecipyBotWeb.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-
-                if (activity.Text == "gif")
-                {
-                    Activity reply = RecipePuppyService.GetRecipeGif(activity);
-                    await connector.Conversations.ReplyToActivityAsync(reply);
-                }
-
-                if (activity.Text == "thumb")
-                {
-                    Activity reply = SendThumnailCard(activity);
-                    await connector.Conversations.SendToConversationAsync(reply);
-                }
-                else if (activity.Text == "thumbr")
-                {
-                    Activity reply = SendThumnailCard(activity);
-                    await connector.Conversations.ReplyToActivityAsync(reply);
-                    //connector.Conversations.
-                }
-                else
-                {
-                    // calculate something for us to return
-                    int length = (activity.Text ?? string.Empty).Length;
-
-                    Activity reply = BotService.MatchPreDefinedMessage(activity);
-
-                    // return our reply to the user
-                    //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                    await connector.Conversations.ReplyToActivityAsync(reply);
-                }
-
+                Activity reply = BotService.HandleBotRequest(activity);
+                await BotService.SendUserResponse(activity, reply);
             }
             else
             {
                 HandleSystemMessage(activity);
             }
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
@@ -80,7 +52,7 @@ namespace RecipyBotWeb.Controllers
             }
             else if (message.Type == ActivityTypes.Typing)
             {
-                // Handle knowing tha the user is typing
+                // Handle knowing that the user is typing
             }
             else if (message.Type == ActivityTypes.Ping)
             {
@@ -88,8 +60,7 @@ namespace RecipyBotWeb.Controllers
 
             return null;
         }
-
-
+        
         private Activity SendThumnailCard(Activity message)
         {
             Activity replyToConversation = message.CreateReply("Should go to conversation, in list format");
