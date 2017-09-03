@@ -18,6 +18,28 @@ namespace RecipyBotWeb.Service
             Random r = new Random();
             return rangeSet.Shuffle().Take((x >= y ? BotConstants.OtherConstants.DefaultTopN : x)); //myValues.OrderBy(x => r.Next()).Take(3);            
         }
+
+        public static bool IsUserNameDefaultOrBlank(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                return false;
+            }
+            if (username.Equals("user", StringComparison.InvariantCultureIgnoreCase))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool CompareTwoStrings(string a, string b)
+        {
+            if (a.Trim().Equals(b.Trim(), StringComparison.InvariantCultureIgnoreCase))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 
     public static class EnumerableExtensions

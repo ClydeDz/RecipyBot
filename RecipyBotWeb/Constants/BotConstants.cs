@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 
 namespace RecipyBotWeb.Constants
 {
     public static class BotConstants
     {
-        public enum ActivityTypes
-        {
-            NewRecipe,
-            TopNRecipes,
-            NewRecipeWith,
-            NewRecipeFor,
-            NewRecipeGif, 
-            NewRandomRecipe 
-        }
-                
+        /// <summary>
+        /// Collection of pre defined actions that can be used as commands in the bot
+        /// </summary>                  
         public class PreDefinedActions
         {
             public const string NewRecipe = "New recipe";
@@ -30,18 +19,27 @@ namespace RecipyBotWeb.Constants
             public const string Help = "Help";
             public const string About = "About";
             public const string GetStarted = "Get started";
-            public const string GifRecipe = "gif";
+            public const string GifRecipe = "Gif";
+
+            public const string VisitRecipeActionButton = "View this recipe";
         }
         
+        /// <summary>
+        /// Other bot level constants required for different purposes
+        /// </summary>
         public class OtherConstants
         {
             public const int DefaultTopN = 5;
             public const string DefaultRecipeDish = "Chicken soup";
             public static readonly string[] DefaultIngredients = { "Chicken", "Carrots" };
+            public const string DefaultIngredientsSerialized = "Chicken, Carrots";
             public const string GifImgurKeyword = "i.imgur.com";
-            public const int MaxOptionsGives = 3;
+            public const int MaxOptionsGives = 3;            
         }
 
+        /// <summary>
+        /// Api.Ai console intents
+        /// </summary>
         public class ApiAiActionConstants
         {
             public const string RecipyOfTheDay = "recipy.oftheday";
@@ -52,6 +50,19 @@ namespace RecipyBotWeb.Constants
             public const string RecipyShowGif = "recipy.showgif";
         }
 
+        /// <summary>
+        /// Api.Ai parameters 
+        /// </summary>
+        public class ApiAiParametersConstants
+        {
+            public const string Number = "number";
+            public const string FoodItem = "foodItem";
+            public const string Recipe = "recipe"; 
+        }
+
+        /// <summary>
+        /// Bot Api keys, URLs and other settings
+        /// </summary>
         public class BotApiSettings
         {
             public static string RecipePuppyWebApiUrl

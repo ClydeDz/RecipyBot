@@ -1,6 +1,10 @@
 ﻿using ApiAiSDK;
 using RecipyBotWeb.Constants;
 using Microsoft.Bot.Connector;
+using System;
+using Newtonsoft.Json;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace RecipyBotWeb.Service
 {
@@ -8,42 +12,72 @@ namespace RecipyBotWeb.Service
     {
         public static Activity HandleNaturalInput(Activity message)
         {
-            var config = new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English);
-            var apiAi = new ApiAi(config);
-            var response = apiAi.TextRequest(message.Text);
-            if (!string.IsNullOrEmpty(response.Result.Fulfillment.Speech) && !IsSmallTalk(response.Result.Action))
-            {
-                BotService.SendATextResponse(message, response.Result.Fulfillment.Speech);
-            }            
+            var apiAi = new ApiAi(new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English));
+            var response = apiAi.TextRequest(message.Text);         
 
             switch (response.Result.Action)
             {
                 case BotConstants.ApiAiActionConstants.RecipyCookFor:
-                    return RecipePuppyService.GetTopNRecipes(message, 5);
+                    var entityRecipyCookFor = GetFoodEntities(response.Result.Parameters);
+                    if (string.IsNullOrEmpty(entityRecipyCookFor))
+                    {
+                        return message.CreateReply(response.Result.Fulfillment.Speech);
+                    }
+                    return RecipePuppyService.GetRecipeFor(message, GetFoodEntities(response.Result.Parameters), response.Result.Fulfillment.Speech);
 
                 case BotConstants.ApiAiActionConstants.RecipyOfTheDay:                   
-                    return RecipePuppyService.GetRandomRecipe(message);
+                    return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
 
                 case BotConstants.ApiAiActionConstants.RecipyRandom:
-                    return RecipePuppyService.GetRandomRecipe(message);
+                    return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
 
                 case BotConstants.ApiAiActionConstants.RecipyCookWith:
-                    return RecipePuppyService.GetRandomRecipe(message);
+                    var entityRecipyCookWith = GetFoodEntities(response.Result.Parameters);
+                    if (string.IsNullOrEmpty(entityRecipyCookWith))
+                    {
+                        return message.CreateReply(response.Result.Fulfillment.Speech);
+                    }
+                    return RecipePuppyService.GetRecipeWith(message, JsonConvert.DeserializeObject<string[]>(entityRecipyCookWith), response.Result.Fulfillment.Speech);
 
                 case BotConstants.ApiAiActionConstants.RecipyShowGif:
-                    return RecipePuppyService.GetRecipeGif(message);
+                    return RecipePuppyService.GetRecipeGif(message, response.Result.Fulfillment.Speech);
 
                 case BotConstants.ApiAiActionConstants.RecipyTopN:
-                    return RecipePuppyService.GetTopNRecipes(message, 5);
+                    return RecipePuppyService.GetTopNRecipes(message, GetNumericEntity(response.Result.Parameters), response.Result.Fulfillment.Speech);
 
                 default:
                     return message.CreateReply(response.Result.Fulfillment.Speech);
             }            
         }
 
-        public static bool IsSmallTalk(string apiAiAction)
+        private static int GetNumericEntity(Dictionary<string, object> paramters)
         {
-            return apiAiAction.Contains("smalltalk");
+            int x = 0;
+            foreach (var j in paramters)
+            {
+                if (j.Key == BotConstants.ApiAiParametersConstants.Number)
+                {
+                    x = Convert.ToInt32(j.Value ?? BotConstants.OtherConstants.DefaultTopN);
+                }
+            }
+            return x;
+        }
+
+        private static string GetFoodEntities(Dictionary<string, object> paramters)
+        {
+            string foodItem = string.Empty;
+            foreach (var j in paramters)
+            {
+                if (j.Key == BotConstants.ApiAiParametersConstants.FoodItem)
+                {
+                    foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultIngredientsSerialized : j.Value.ToString();
+                }
+                if (j.Key == BotConstants.ApiAiParametersConstants.Recipe)
+                {
+                    foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultRecipeDish : j.Value.ToString();
+                }
+            }
+            return foodItem;
         }
     }
 }

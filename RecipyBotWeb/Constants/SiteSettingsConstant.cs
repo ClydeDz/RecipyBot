@@ -1,28 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace RecipyBotWeb.Constants
 {
     public class SiteSettingsConstant
     {
-        public static string RecipePuppyWebApiUrl
+        public static string FacebookBotUrl
         {
-            get { return ConfigurationManager.AppSettings["RecipePuppyWebApiUrl"]; }
+            get { return ConfigurationManager.AppSettings["FacebookBotUrl"]; }
         }
 
-        public static string RecipePuppyWebApiUrlWithQuery
+        public static string SkypeBotUrl
         {
-            get { return ConfigurationManager.AppSettings["RecipePuppyWebApiUrlWithQuery"]; }
+            get { return ConfigurationManager.AppSettings["SkypeBotUrl"]; }
         }
-    }
-    public static class ApiUrls
-    {
-        public const string RecipePuppyGet = "http://www.recipepuppy.com/api/";
-        public const string RecipePuppyGetWithQuery = "http://www.recipepuppy.com/api/";
-        public const string GifRecipes = "https://www.reddit.com/r/GifRecipes.json";
+
+        public static string SlackBotUrl
+        {
+            get { return ConfigurationManager.AppSettings["SlackBotUrl"]; }
+        }
+
+        public static string TelegramBotUrl
+        {
+            get { return ConfigurationManager.AppSettings["TelegramBotUrl"]; }
+        }
+
+        public static string WebBotUrl
+        {
+            get { return ConfigurationManager.AppSettings["WebBotUrl"]; }
+        }
+
+        public static string BotId
+        {
+            get { return ConfigurationManager.AppSettings["BotId"]; }
+        }
+
+        private static string _MicrosoftAppId
+        {
+            get { return ConfigurationManager.AppSettings["MicrosoftAppId"]; }
+        }
+
+        private static string _MicrosoftAppPassword
+        {
+            get { return ConfigurationManager.AppSettings["MicrosoftAppPassword"]; }
+        }
+
     }
 }

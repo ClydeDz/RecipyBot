@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using RecipyBotWeb.Models;
 using RecipyBotWeb.Constants;
 using Microsoft.Bot.Connector;
@@ -10,43 +8,43 @@ namespace RecipyBotWeb.Service
 {
     public class RecipePuppyService
     {
-        public static Activity GetAllRecipies(Activity message)
+        public static Activity GetAllRecipies(Activity message, string defaultResponse)
         {
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(webResponse.results.Count(), webResponse.results.Count());
-            return _GenerateRecipeMessage(message, webResponse, randomNumbers);
+            return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
         }
 
-        public static Activity GetRandomRecipe(Activity message)
+        public static Activity GetRandomRecipe(Activity message, string defaultResponse)
         {
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.results.Count());
-            return _GenerateRecipeMessage(message, webResponse, randomNumbers);
+            return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
         }
 
-        public static Activity GetTopNRecipes(Activity message, int n)
+        public static Activity GetTopNRecipes(Activity message, int n, string defaultResponse)
         {
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(n, webResponse.results.Count());
-            return _GenerateRecipeMessage(message, webResponse, randomNumbers);
+            return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
         }
 
-        public static Activity GetRecipeWith(Activity message, string[] ingredients)
+        public static Activity GetRecipeWith(Activity message, string[] ingredients, string defaultResponse)
         {
             string listOfIngredients = string.Join(",", ingredients.Select(item => item).ToArray());
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrlWithIngredients + "" + listOfIngredients);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(BotConstants.OtherConstants.MaxOptionsGives, webResponse.results.Count());
-            return _GenerateRecipeMessage(message, webResponse, randomNumbers);
+            return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
         }
 
-        public static Activity GetRecipeFor(Activity message, string dish)
+        public static Activity GetRecipeFor(Activity message, string dish, string defaultResponse)
         {
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrlWithQuery + "" + dish);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(BotConstants.OtherConstants.MaxOptionsGives, webResponse.results.Count());
-            return _GenerateRecipeMessage(message, webResponse, randomNumbers);            
+            return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);            
         }
 
-        public static Activity GetRecipeGif(Activity message)
+        public static Activity GetRecipeGif(Activity message, string defaultResponse)
         {
             GifRecipesDataModel webResponse = WebApiConnectorService.GenericGetRequest<GifRecipesDataModel>(BotConstants.BotApiSettings.GifRecipes);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.data.children.Where(p=> p.data.domain == BotConstants.OtherConstants.GifImgurKeyword).Count());
@@ -81,9 +79,9 @@ namespace RecipyBotWeb.Service
             return replyToConversation;
         }
 
-        private static Activity _GenerateRecipeMessage(Activity message, RecipePuppyDataModel recipes, IEnumerable<int> randomNumbers)
+        private static Activity _GenerateRecipeMessage(Activity message, RecipePuppyDataModel recipes, IEnumerable<int> randomNumbers, string defaultResponse)
         {   
-            Activity replyToConversation = message.CreateReply();
+            Activity replyToConversation = message.CreateReply(defaultResponse);
             replyToConversation.AttachmentLayout = AttachmentLayoutTypes.List;
             replyToConversation.Attachments = new List<Attachment>();
             Dictionary<string, string> cardContentList = new Dictionary<string, string>();
@@ -98,31 +96,15 @@ namespace RecipyBotWeb.Service
                     recipe.href
                 );
 
-                // Create a card image element
-                List<CardImage> cardImages = new List<CardImage>();
-                cardImages.Add(
-                    new CardImage(url: recipe.thumbnail)
-                );
-
-                // Create a card button element
-                List<CardAction> cardButtons = new List<CardAction>();
-                cardButtons.Add(
-                    new CardAction()
-                    {
-                        Value = recipe.ingredients,
-                        Type = "openUrl",
-                        Title = recipe.title
-                    }
-                );
-
                 // Add the card image and button element to a thumbnail of the response
                 replyToConversation.Attachments.Add(
                     new ThumbnailCard()
                     {
                         Title = recipe.title,
-                        Subtitle = recipe.ingredients,
-                        Images = cardImages,
-                        Buttons = cardButtons
+                        Subtitle = "",
+                        Text = "Made using " + recipe.ingredients,
+                        Images = new List<CardImage> { new CardImage(recipe.thumbnail) },
+                        Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, BotConstants.PreDefinedActions.VisitRecipeActionButton, value: recipe.href) }
                     }.ToAttachment()
                 );
             }

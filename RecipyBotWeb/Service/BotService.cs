@@ -9,35 +9,31 @@ namespace RecipyBotWeb.Service
     {
         public static Activity HandleBotRequest(Activity userMessage)
         {
-            if (userMessage.Text == BotConstants.PreDefinedActions.NewRecipeGif || userMessage.Text == BotConstants.PreDefinedActions.GifRecipe)
+            if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeGif) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GifRecipe))
             {
-                return RecipePuppyService.GetRecipeGif(userMessage); 
+                return RecipePuppyService.GetRecipeGif(userMessage, string.Empty); 
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.NewRandomRecipe)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRandomRecipe))
             {
-                return RecipePuppyService.GetRandomRecipe(userMessage);
+                return RecipePuppyService.GetRandomRecipe(userMessage, string.Empty);
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.NewRecipeFor)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeFor))
             {
-                return RecipePuppyService.GetRecipeFor(userMessage, BotConstants.OtherConstants.DefaultRecipeDish);
+                return RecipePuppyService.GetRecipeFor(userMessage, BotConstants.OtherConstants.DefaultRecipeDish, string.Empty);
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.NewRecipeWith)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeWith))
             {
-                return RecipePuppyService.GetRecipeWith(userMessage, BotConstants.OtherConstants.DefaultIngredients);
+                return RecipePuppyService.GetRecipeWith(userMessage, BotConstants.OtherConstants.DefaultIngredients, string.Empty);
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.TopNRecipes)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.TopNRecipes))
             {
-                return RecipePuppyService.GetTopNRecipes(userMessage, BotConstants.OtherConstants.DefaultTopN);
+                return RecipePuppyService.GetTopNRecipes(userMessage, BotConstants.OtherConstants.DefaultTopN, string.Empty);
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.About)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.About))
             {
                 return AboutResponse(userMessage);
             }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.Help)
-            {
-                return HelpResponse(userMessage);
-            }
-            else if (userMessage.Text == BotConstants.PreDefinedActions.GetStarted)
+            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GetStarted) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Help))
             {
                 return GetStartedResponse(userMessage);
             }
@@ -67,19 +63,20 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetStartedResponse(Activity message)
         {
-            Activity replyToConversation = message.CreateReply("To get started, simple type \n\n New recipe gif or \n\n random");
-            return replyToConversation;
-        }
+            string user = MiscService.IsUserNameDefaultOrBlank(message.From.Name) ? "Hi " + message.From.Name + "! " : string.Empty;
+            string response = "To get started, simple type something like the following:\n\n * Show me the top 5 recipes\n\n * Show me a recipe with chicken and basil\n\n * Show me a recipe for risotto\n\n * Show me an animated recipe\n\n * Show me a random recipe";
+            SendATextResponse(message, response);
 
-        public static Activity HelpResponse(Activity message)
-        {
-            Activity replyToConversation = message.CreateReply("Help To get started, simple type \n New recipe gif or \n random");
+            Activity replyToConversation = message.CreateReply("Recipy Bot is always online so feel free to send me a message anytime.");
             return replyToConversation;
         }
 
         public static Activity AboutResponse(Activity message)
         {
-            Activity replyToConversation = message.CreateReply("About To get started, simple type \n New recipe gif or \n random");
+            string response = "Recipy Bot is a virtual service that helps with fetching recipes for a particular dish or something that you can make using some ingredients that you may have.";
+            SendATextResponse(message, response);
+
+            Activity replyToConversation = message.CreateReply("This is developed by [Clyde D'Souza](https://clydedsouza.net). Please visit [this page](https://github.com/ClydeDz/RecipyBot/issues/new) to provide any feedback on this app.\n\nRecipes provided by [Recipe Puppy](http://www.recipepuppy.com/).");
             return replyToConversation;
         }
 

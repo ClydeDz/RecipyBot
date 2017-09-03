@@ -61,46 +61,5 @@ namespace RecipyBotWeb.Controllers
             return null;
         }
         
-        private Activity SendThumnailCard(Activity message)
-        {
-            Activity replyToConversation = message.CreateReply("Should go to conversation, in list format");
-            replyToConversation.AttachmentLayout = AttachmentLayoutTypes.List;
-            replyToConversation.Attachments = new List<Attachment>();
-
-            Dictionary<string, string> cardContentList = new Dictionary<string, string>();
-            cardContentList.Add("PigLatin", "http://www.fujifilm.com/products/digital_cameras/x/fujifilm_x100f/sample_images/img/index/ff_x100f_003.JPG");
-            cardContentList.Add("Pork Shoulder", "http://www.fujifilm.com/products/digital_cameras/x/fujifilm_x100f/sample_images/img/index/ff_x100f_004.JPG");
-
-            foreach (KeyValuePair<string, string> cardContent in cardContentList)
-            {
-                List<CardImage> cardImages = new List<CardImage>();
-                cardImages.Add(new CardImage(url: cardContent.Value));
-
-                List<CardAction> cardButtons = new List<CardAction>();
-
-                CardAction plButton = new CardAction()
-                {
-                    Value = $"https://en.wikipedia.org/wiki/{cardContent.Key}",
-                    Type = "openUrl",
-                    Title = "WikiPedia Page"
-                };
-
-                cardButtons.Add(plButton);
-
-                ThumbnailCard plCard = new ThumbnailCard()
-                {
-                    Title = $"I'm a thumbnail card about {cardContent.Key}",
-                    Subtitle = $"{cardContent.Key} Wikipedia Page",
-                    Images = cardImages,
-                    Buttons = cardButtons
-                };
-
-                Attachment plAttachment = plCard.ToAttachment();
-                replyToConversation.Attachments.Add(plAttachment);
-            }
-
-            return replyToConversation;
-            //var reply = await connector.Conversations.SendToConversationAsync(replyToConversation);
-        }
     }
 }
