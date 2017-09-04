@@ -3,7 +3,6 @@ using RecipyBotWeb.Constants;
 using Microsoft.Bot.Connector;
 using System;
 using Newtonsoft.Json;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace RecipyBotWeb.Service

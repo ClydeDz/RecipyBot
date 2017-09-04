@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using RecipyBotWeb.Constants;
 
 namespace RecipyBotWeb.Service
@@ -40,8 +39,38 @@ namespace RecipyBotWeb.Service
             }
             return false;
         }
+
+        public static string GetRandomTagline()
+        {
+            string[] taglines = new string[] {
+                "Delicious and tempting",
+                "Perfect for guests"
+            };
+            foreach (var tagline in taglines.Shuffle().Take(1))
+            {
+                return tagline.ToString();
+            }
+            return "";
+        }
+
+        public static string GetRandomIngredientsPrefix()
+        {
+            string[] prefixes = new string[] {
+                "Made with",
+                "Ingredients:",
+                "Ingredients are",
+                "You will need"
+            };
+            foreach (var prefix in prefixes.Shuffle().Take(1))
+            {
+                return prefix.ToString() + " ";
+            }
+            return "";
+        }
+
     }
 
+    #region EXTENSIONS
     public static class EnumerableExtensions
     {
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
@@ -69,5 +98,5 @@ namespace RecipyBotWeb.Service
             }
         }
     }
-
+    #endregion
 }
