@@ -1,11 +1,7 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title Recipy Bot</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @{ Html.RenderPartial("~/Views/Shared/_HeaderPartial.cshtml");  }
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,17 +16,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
+                    <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        @{ Html.RenderPartial("~/Views/Shared/_FooterPartial.cshtml");  }
     </div>
 
     @Scripts.Render("~/bundles/jquery")

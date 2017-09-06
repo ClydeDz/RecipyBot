@@ -288,3 +288,4 @@ __pycache__/
 *.xsd.cs
 /recpy api.txt
 /RecipyBotWeb/PrivateSettings.config
+/Docs/

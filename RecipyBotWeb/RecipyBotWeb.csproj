@@ -187,26 +187,42 @@
     <Compile Include="Service\WebApiConnectorService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Vendor\bootstrap.css" />
+    <Content Include="Content\Vendor\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Vendor\bootstrap.js" />
+    <Content Include="Scripts\Vendor\bootstrap.min.js" />
     <Content Include="PrivateSettings.config" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Content\Modules\_colours.scss" />
+    <Content Include="Content\Modules\_general.scss" />
+    <Content Include="Content\Modules\_animation.scss" />
+    <Content Include="Content\Modules\_buttons.scss" />
+    <Content Include="Content\main.scss" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="Properties\PublishProfiles\recipybot - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\recipybot - Web Deploy.pubxml" />
+    <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Vendor\jquery-1.10.2.js" />
+    <Content Include="Scripts\Vendor\jquery-1.10.2.min.js" />
+    <None Include="Scripts\Vendor\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Vendor\jquery.validate.js" />
+    <Content Include="Scripts\Vendor\jquery.validate.min.js" />
+    <Content Include="Scripts\Vendor\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Vendor\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Vendor\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Vendor\respond.js" />
+    <Content Include="Scripts\Vendor\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -224,6 +240,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Terms.cshtml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\Shared\_HeaderPartial.cshtml" />
+    <Content Include="Views\Shared\_FooterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -234,7 +254,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\Vendor\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

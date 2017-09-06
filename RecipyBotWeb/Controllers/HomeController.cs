@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
-using RecipyBotWeb.Service;
 
 namespace RecipyBotWeb.Controllers
 {
@@ -28,8 +24,19 @@ namespace RecipyBotWeb.Controllers
 
             return View();
         }
+        
+        public ActionResult Privacy()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        
+        public ActionResult Terms()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
     }
-
-
-  
 }
