@@ -68,6 +68,10 @@ namespace RecipyBotWeb.Service
             return "";
         }
 
+        public static string MakeGif(string gifUrl)
+        {
+            return gifUrl.Substring(0, gifUrl.Length - 1);
+        }
     }
 
     #region EXTENSIONS

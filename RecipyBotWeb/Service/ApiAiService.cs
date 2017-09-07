@@ -11,42 +11,49 @@ namespace RecipyBotWeb.Service
     {
         public static Activity HandleNaturalInput(Activity message)
         {
-            var apiAi = new ApiAi(new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English));
-            var response = apiAi.TextRequest(message.Text);         
-
-            switch (response.Result.Action)
+            try
             {
-                case BotConstants.ApiAiActionConstants.RecipyCookFor:
-                    var entityRecipyCookFor = GetFoodEntities(response.Result.Parameters);
-                    if (string.IsNullOrEmpty(entityRecipyCookFor))
-                    {
+                var apiAi = new ApiAi(new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English));
+                var response = apiAi.TextRequest(message.Text);
+
+                switch (response.Result.Action)
+                {
+                    case BotConstants.ApiAiActionConstants.RecipyCookFor:
+                        var entityRecipyCookFor = GetFoodEntities(response.Result.Parameters);
+                        if (string.IsNullOrEmpty(entityRecipyCookFor))
+                        {
+                            return message.CreateReply(response.Result.Fulfillment.Speech);
+                        }
+                        return RecipePuppyService.GetRecipeFor(message, GetFoodEntities(response.Result.Parameters), response.Result.Fulfillment.Speech);
+
+                    case BotConstants.ApiAiActionConstants.RecipyOfTheDay:
+                        return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
+
+                    case BotConstants.ApiAiActionConstants.RecipyRandom:
+                        return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
+
+                    case BotConstants.ApiAiActionConstants.RecipyCookWith:
+                        var entityRecipyCookWith = GetFoodEntities(response.Result.Parameters);
+                        if (string.IsNullOrEmpty(entityRecipyCookWith))
+                        {
+                            return message.CreateReply(response.Result.Fulfillment.Speech);
+                        }
+                        return RecipePuppyService.GetRecipeWith(message, JsonConvert.DeserializeObject<string[]>(entityRecipyCookWith), response.Result.Fulfillment.Speech);
+
+                    case BotConstants.ApiAiActionConstants.RecipyShowGif:
+                        return RecipePuppyService.GetRecipeGif(message, response.Result.Fulfillment.Speech);
+
+                    case BotConstants.ApiAiActionConstants.RecipyTopN:
+                        return RecipePuppyService.GetTopNRecipes(message, GetNumericEntity(response.Result.Parameters), response.Result.Fulfillment.Speech);
+
+                    default:
                         return message.CreateReply(response.Result.Fulfillment.Speech);
-                    }
-                    return RecipePuppyService.GetRecipeFor(message, GetFoodEntities(response.Result.Parameters), response.Result.Fulfillment.Speech);
-
-                case BotConstants.ApiAiActionConstants.RecipyOfTheDay:                   
-                    return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
-
-                case BotConstants.ApiAiActionConstants.RecipyRandom:
-                    return RecipePuppyService.GetRandomRecipe(message, response.Result.Fulfillment.Speech);
-
-                case BotConstants.ApiAiActionConstants.RecipyCookWith:
-                    var entityRecipyCookWith = GetFoodEntities(response.Result.Parameters);
-                    if (string.IsNullOrEmpty(entityRecipyCookWith))
-                    {
-                        return message.CreateReply(response.Result.Fulfillment.Speech);
-                    }
-                    return RecipePuppyService.GetRecipeWith(message, JsonConvert.DeserializeObject<string[]>(entityRecipyCookWith), response.Result.Fulfillment.Speech);
-
-                case BotConstants.ApiAiActionConstants.RecipyShowGif:
-                    return RecipePuppyService.GetRecipeGif(message, response.Result.Fulfillment.Speech);
-
-                case BotConstants.ApiAiActionConstants.RecipyTopN:
-                    return RecipePuppyService.GetTopNRecipes(message, GetNumericEntity(response.Result.Parameters), response.Result.Fulfillment.Speech);
-
-                default:
-                    return message.CreateReply(response.Result.Fulfillment.Speech);
-            }            
+                }
+            }
+            catch (Exception e)
+            {
+                return message.CreateReply("Oops, something happened " + e.Message);
+            }
         }
 
         private static int GetNumericEntity(Dictionary<string, object> paramters)

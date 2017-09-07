@@ -10,7 +10,11 @@ namespace RecipyBotWeb.Service
     {
         public static Activity GetAllRecipies(Activity message, string defaultResponse)
         {
-            BotService.SendATextResponse(message, defaultResponse);
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                BotService.SendATextResponse(message, defaultResponse);
+            }
+
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(webResponse.results.Count(), webResponse.results.Count());
             return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
@@ -18,7 +22,11 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetRandomRecipe(Activity message, string defaultResponse)
         {
-            BotService.SendATextResponse(message, defaultResponse);
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                BotService.SendATextResponse(message, defaultResponse);
+            }
+
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.results.Count());
             return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
@@ -26,7 +34,11 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetTopNRecipes(Activity message, int n, string defaultResponse)
         {
-            BotService.SendATextResponse(message, defaultResponse);
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                BotService.SendATextResponse(message, defaultResponse);
+            }
+           
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrl);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(n, webResponse.results.Count());
             return _GenerateRecipeMessage(message, webResponse, randomNumbers, defaultResponse);
@@ -34,7 +46,11 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetRecipeWith(Activity message, string[] ingredients, string defaultResponse)
         {
-            BotService.SendATextResponse(message, defaultResponse);
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                BotService.SendATextResponse(message, defaultResponse);
+            }
+
             string listOfIngredients = string.Join(",", ingredients.Select(item => item).ToArray());
             RecipePuppyDataModel webResponse = WebApiConnectorService.GenericGetRequest<RecipePuppyDataModel>(BotConstants.BotApiSettings.RecipePuppyWebApiUrlWithIngredients + "" + listOfIngredients);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(BotConstants.OtherConstants.MaxOptionsGives, webResponse.results.Count());
@@ -51,7 +67,10 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetRecipeGif(Activity message, string defaultResponse)
         {
-            BotService.SendATextResponse(message, defaultResponse);
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                BotService.SendATextResponse(message, defaultResponse);
+            }            
 
             GifRecipesDataModel webResponse = WebApiConnectorService.GenericGetRequest<GifRecipesDataModel>(BotConstants.BotApiSettings.GifRecipes);
             IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.data.children.Where(p=> p.data.domain == BotConstants.OtherConstants.GifImgurKeyword).Count());
@@ -67,7 +86,10 @@ namespace RecipyBotWeb.Service
                     new AnimationCard
                     {
                         Title = thisData.data.title,
-                        Subtitle = "",
+                        Subtitle = "by @" + thisData.data.author,
+                        Text = "Perfect for " + thisData.data.link_flair_text.ToString().ToLower().Trim(),
+                        Autostart = true,
+                        Shareable = true,
                         Image = new ThumbnailUrl
                         {
                             Url = thisData.data.thumbnail
@@ -76,7 +98,16 @@ namespace RecipyBotWeb.Service
                         {
                             new MediaUrl()
                             {
-                                Url = thisData.data.url
+                                Url = MiscService.MakeGif(thisData.data.url), Profile = "image/gif"
+                            }
+                        },
+                        Buttons = new List<CardAction>
+                        {
+                            new CardAction()
+                            {
+                                Title = "Learn More",
+                                Type = ActionTypes.OpenUrl,
+                                Value = "https://peach.blender.org/"
                             }
                         }
                     }.ToAttachment()
@@ -96,6 +127,7 @@ namespace RecipyBotWeb.Service
             foreach (var value in randomNumbers)
             {
                 var recipe = recipes.results.ElementAt(value);
+                string recipeImage = FlickrService.GetImage(recipe.title);
 
                 // Add basic card content details
                 cardContentList.Add(
@@ -105,12 +137,12 @@ namespace RecipyBotWeb.Service
 
                 // Add the card image and button element to a thumbnail of the response
                 replyToConversation.Attachments.Add(
-                    new ThumbnailCard() // Can also use HeroCard()
+                    new HeroCard() // Can also use HeroCard()
                     {
                         Title = recipe.title,
                         Subtitle = MiscService.GetRandomTagline(),
                         Text = MiscService.GetRandomIngredientsPrefix() + recipe.ingredients,
-                        Images = new List<CardImage> { new CardImage(recipe.thumbnail) },
+                        Images = new List<CardImage> { new CardImage(recipeImage) }, //recipe.thumbnail
                         Buttons = new List<CardAction> { new CardAction(ActionTypes.OpenUrl, BotConstants.PreDefinedActions.VisitRecipeActionButton, value: recipe.href) }
                     }.ToAttachment()
                 );
@@ -118,5 +150,8 @@ namespace RecipyBotWeb.Service
 
             return replyToConversation;
         }
+
+
+     
     }
 }

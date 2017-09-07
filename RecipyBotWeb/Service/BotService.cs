@@ -9,38 +9,50 @@ namespace RecipyBotWeb.Service
     {
         public static Activity HandleBotRequest(Activity userMessage)
         {
-            if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeGif) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GifRecipe))
+            try
             {
-                return RecipePuppyService.GetRecipeGif(userMessage, string.Empty); 
+                if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeGif) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GifRecipe))
+                {
+                    return RecipePuppyService.GetRecipeGif(userMessage, string.Empty);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRandomRecipe))
+                {
+                    return RecipePuppyService.GetRandomRecipe(userMessage, string.Empty);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeFor))
+                {
+                    return RecipePuppyService.GetRecipeFor(userMessage, BotConstants.OtherConstants.DefaultRecipeDish, string.Empty);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeWith))
+                {
+                    return RecipePuppyService.GetRecipeWith(userMessage, BotConstants.OtherConstants.DefaultIngredients, string.Empty);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.TopNRecipes))
+                {
+                    return RecipePuppyService.GetTopNRecipes(userMessage, BotConstants.OtherConstants.DefaultTopN, string.Empty);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.About))
+                {
+                    return AboutResponse(userMessage);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GetStarted) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Help))
+                {
+                    return GetStartedResponse(userMessage);
+                }
+                else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Version))
+                {
+                    return VersionResponse(userMessage);
+                }
+                else
+                {
+                    return ApiAiService.HandleNaturalInput(userMessage);
+                }
             }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRandomRecipe))
+            catch(Exception e)
             {
-                return RecipePuppyService.GetRandomRecipe(userMessage, string.Empty);
+                return userMessage.CreateReply("Oops, something went wrong " + e.Message);
             }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeFor))
-            {
-                return RecipePuppyService.GetRecipeFor(userMessage, BotConstants.OtherConstants.DefaultRecipeDish, string.Empty);
-            }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.NewRecipeWith))
-            {
-                return RecipePuppyService.GetRecipeWith(userMessage, BotConstants.OtherConstants.DefaultIngredients, string.Empty);
-            }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.TopNRecipes))
-            {
-                return RecipePuppyService.GetTopNRecipes(userMessage, BotConstants.OtherConstants.DefaultTopN, string.Empty);
-            }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.About))
-            {
-                return AboutResponse(userMessage);
-            }
-            else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GetStarted) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Help))
-            {
-                return GetStartedResponse(userMessage);
-            }
-            else
-            {
-                return ApiAiService.HandleNaturalInput(userMessage);
-            }            
+                    
         }
 
         public static async void SendATextResponse(Activity userMessage, string responseToUser)
@@ -77,6 +89,12 @@ namespace RecipyBotWeb.Service
             SendATextResponse(message, response);
 
             Activity replyToConversation = message.CreateReply("This is developed by [Clyde D'Souza](https://clydedsouza.net). Please visit [this page](https://github.com/ClydeDz/RecipyBot/issues/new) to provide any feedback on this app.\n\nRecipes provided by [Recipe Puppy](http://www.recipepuppy.com/).");
+            return replyToConversation;
+        }
+
+        public static Activity VersionResponse(Activity message)
+        {
+            Activity replyToConversation = message.CreateReply(BotConstants.OtherConstants.Version);
             return replyToConversation;
         }
 

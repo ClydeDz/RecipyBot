@@ -177,12 +177,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FlickrDataModel.cs" />
     <Compile Include="Models\GifRecipesDataModel.cs" />
+    <Compile Include="Models\QwantDataModel.cs" />
     <Compile Include="Models\RecipePuppyDataModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ApiAiService.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="Service\FlickrService.cs" />
     <Compile Include="Service\MiscService.cs" />
+    <Compile Include="Service\QwantService.cs" />
     <Compile Include="Service\RecipePuppyService.cs" />
     <Compile Include="Service\WebApiConnectorService.cs" />
   </ItemGroup>
@@ -200,7 +204,9 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\Vendor\bootstrap.js" />
     <Content Include="Scripts\Vendor\bootstrap.min.js" />
-    <Content Include="PrivateSettings.config" />
+    <Content Include="PrivateSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Modules\_colours.scss" />
     <Content Include="Content\Modules\_general.scss" />
     <Content Include="Content\Modules\_animation.scss" />

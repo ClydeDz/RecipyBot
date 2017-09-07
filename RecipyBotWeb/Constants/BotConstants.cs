@@ -20,6 +20,7 @@ namespace RecipyBotWeb.Constants
             public const string About = "About";
             public const string GetStarted = "Get started";
             public const string GifRecipe = "Gif";
+            public const string Version = "Version";
 
             public const string VisitRecipeActionButton = "View this recipe";
         }
@@ -34,7 +35,12 @@ namespace RecipyBotWeb.Constants
             public static readonly string[] DefaultIngredients = { "Chicken", "Carrots" };
             public const string DefaultIngredientsSerialized = "Chicken, Carrots";
             public const string GifImgurKeyword = "i.imgur.com";
-            public const int MaxOptionsGives = 3;            
+            public const int MaxOptionsGives = 3;
+
+            public static string Version
+            {
+                get { return ConfigurationManager.AppSettings["Bot:Version"]; }
+            }
         }
 
         /// <summary>
@@ -93,6 +99,16 @@ namespace RecipyBotWeb.Constants
             public static string ApiAiClientAccessToken
             {
                 get { return ConfigurationManager.AppSettings["Bot:ApiAiClientAccessToken"]; }
+            }
+
+            public static string QwantImageApi
+            {
+                get { return ConfigurationManager.AppSettings["Bot:QwantImageApi"]; }
+            }
+
+            public static string FlickrImageApi
+            {
+                get { return ConfigurationManager.AppSettings["Bot:FlickrImageApi"]; }
             }
         }       
     }
