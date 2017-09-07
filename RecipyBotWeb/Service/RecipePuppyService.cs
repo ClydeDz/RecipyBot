@@ -3,6 +3,7 @@ using System.Linq;
 using RecipyBotWeb.Models;
 using RecipyBotWeb.Constants;
 using Microsoft.Bot.Connector;
+using System;
 
 namespace RecipyBotWeb.Service
 {
@@ -67,54 +68,63 @@ namespace RecipyBotWeb.Service
 
         public static Activity GetRecipeGif(Activity message, string defaultResponse)
         {
-            if (!string.IsNullOrEmpty(defaultResponse))
+            try
             {
-                BotService.SendATextResponse(message, defaultResponse);
-            }            
+                if (!string.IsNullOrEmpty(defaultResponse))
+                {
+                    BotService.SendATextResponse(message, defaultResponse);
+                }
 
-            GifRecipesDataModel webResponse = WebApiConnectorService.GenericGetRequest<GifRecipesDataModel>(BotConstants.BotApiSettings.GifRecipes);
-            IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.data.children.Where(p=> p.data.domain == BotConstants.OtherConstants.GifImgurKeyword).Count());
+                GifRecipesDataModel webResponse = WebApiConnectorService.GenericGetRequest<GifRecipesDataModel>(BotConstants.BotApiSettings.GifRecipes);
+                IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.data.children.Where(p => p.data.domain == BotConstants.OtherConstants.GifImgurKeyword).Count());
 
-            Activity replyToConversation = message.CreateReply();
-            replyToConversation.Attachments = new List<Attachment>();
-                        
-            foreach(var value in randomNumbers)
-            {
-                var thisData = webResponse.data.children.Where(k => k.data.domain == BotConstants.OtherConstants.GifImgurKeyword).ElementAt(value);
+                Activity replyToConversation = message.CreateReply("thidtitlenls");
+                replyToConversation.Attachments = new List<Attachment>();
+                replyToConversation.AttachmentLayout = AttachmentLayoutTypes.List;
+                //replyToConversation.Text = "kjfjefkwek";
 
-                replyToConversation.Attachments.Add(
-                    new AnimationCard
-                    {
-                        Title = thisData.data.title,
-                        Subtitle = "by @" + thisData.data.author,
-                        Text = "Perfect for " + thisData.data.link_flair_text.ToString().ToLower().Trim(),
-                        Autostart = true,
-                        Shareable = true,
-                        Image = new ThumbnailUrl
+                foreach (var value in randomNumbers)
+                {
+                    var thisData = webResponse.data.children.Where(k => k.data.domain == BotConstants.OtherConstants.GifImgurKeyword).ElementAt(value);
+
+                    replyToConversation.Attachments.Add(
+                        new AnimationCard
                         {
-                            Url = thisData.data.thumbnail
-                        },
-                        Media = new List<MediaUrl>
-                        {
+                            Title = thisData.data.title,
+                            Subtitle = "by @" + thisData.data.author + ". Perfect for " + thisData.data.link_flair_text.ToString().ToLower().Trim(),
+                            Autostart = true,
+                            Shareable = true,
+                            Image = new ThumbnailUrl
+                            {
+                                Url = thisData.data.thumbnail
+                            },
+                            Media = new List<MediaUrl>
+                            {
                             new MediaUrl()
                             {
                                 Url = MiscService.MakeGif(thisData.data.url), Profile = "image/gif"
                             }
-                        },
-                        Buttons = new List<CardAction>
-                        {
+                            },
+                            Buttons = new List<CardAction>
+                            {
                             new CardAction()
                             {
                                 Title = "Learn More",
                                 Type = ActionTypes.OpenUrl,
                                 Value = "https://peach.blender.org/"
                             }
-                        }
-                    }.ToAttachment()
-                );
+                            }
+                        }.ToAttachment()
+                    );
+                }
+
+                return replyToConversation;
+            }
+            catch (Exception e)
+            {
+                return message.CreateReply("GIF error " + e.Message);
             }
             
-            return replyToConversation;
         }
 
         private static Activity _GenerateRecipeMessage(Activity message, RecipePuppyDataModel recipes, IEnumerable<int> randomNumbers, string defaultResponse)
