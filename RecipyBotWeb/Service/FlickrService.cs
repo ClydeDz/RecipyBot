@@ -11,7 +11,8 @@ namespace RecipyBotWeb.Service
     {
         public static string GetImage(string query)
         {
-            FlickrDataModel webResponse = WebApiConnectorService.GenericGetRequest<FlickrDataModel>(BotConstants.BotApiSettings.FlickrImageApi + "&method=flickr.photos.search&text=" + HttpContext.Current.Server.UrlEncode(query) + "&format=json&nojsoncallback=1"); 
+            string apiCall = BotConstants.BotApiSettings.FlickrImageApi + "&method=flickr.photos.search&text=" + HttpContext.Current.Server.UrlEncode(query) + "&format=json&nojsoncallback=1";
+            FlickrDataModel webResponse = WebApiConnectorService.GenericGetRequest<FlickrDataModel>(apiCall); 
             IEnumerable <int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.photos.photo.Count);
             string _imageUrl = string.Empty;
             foreach (var value in randomNumbers)

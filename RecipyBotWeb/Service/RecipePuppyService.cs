@@ -87,6 +87,8 @@ namespace RecipyBotWeb.Service
                 {
                     var thisData = webResponse.data.children.Where(k => k.data.domain == BotConstants.OtherConstants.GifImgurKeyword).ElementAt(value);
 
+                    BotService.SendATextResponse(message, MiscService.MakeGif(thisData.data.url));
+
                     replyToConversation.Attachments.Add(
                         new AnimationCard
                         {

@@ -21,7 +21,8 @@ namespace RecipyBotWeb
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/Vendor/bootstrap.js",
-                      "~/Scripts/Vendor/respond.js"));
+                      "~/Scripts/Vendor/respond.js",
+                      "~/Scripts/Vendor/typed.min.js"));
             #endregion
 
             #region CSS

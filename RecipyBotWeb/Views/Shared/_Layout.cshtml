@@ -4,33 +4,85 @@
     @{ Html.RenderPartial("~/Views/Shared/_HeaderPartial.cshtml");  }
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Recipy Bot", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!-- wrapper -->
+    <div id="wrapper">
+
+        <div class="overlay"></div>
+
+        @{ Html.RenderPartial("~/Views/Shared/_MenuPartial.cshtml");  }
+
+        <div id="page-content-wrapper">
+            <div class="website-header">
+                <div class="container text-left">
+                    <h1>The Recipy Bot</h1>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
-                    <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="website-banner">
+                <div class="website-logo text-center">
+                    <img src="~/Images/recipybot.png" alt="" width="150" />
+                </div>
+                <div class="text-center" id="typed-strings">
+                    <p>Hi! I'm Recipy Bot ^1000</p>
+                    <p>I help you with recipes ^1000</p>
+                </div>
+                <div class="text-center website-typed-text"><span id="typed"></span></div>
+                <div class="the-curve"></div>
+            </div>
+            <div class="body-content">
+                @RenderBody()
+            </div>
+            <div>
+                @{ Html.RenderPartial("~/Views/Shared/_FooterPartial.cshtml");  }
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        @{ Html.RenderPartial("~/Views/Shared/_FooterPartial.cshtml");  }
-    </div>
+    <!-- /#wrapper -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        var typed = new Typed('#typed', {
+            stringsElement: '#typed-strings',
+            typeSpeed: 40,
+            loop: true
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var trigger = $('.hamburger'),
+            overlay = $('.overlay'),
+            isClosed = false;
+
+            trigger.click(function () {
+                hamburger_cross();
+            });
+
+            function hamburger_cross() {
+
+                if (isClosed == true) {
+                    overlay.hide();
+                    trigger.removeClass('is-open');
+                    trigger.addClass('is-closed');
+                    isClosed = false;
+                } else {
+                    overlay.show();
+                    trigger.removeClass('is-closed');
+                    trigger.addClass('is-open');
+                    isClosed = true;
+                }
+            }
+
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('#wrapper').toggleClass('toggled');
+            });
+        });
+    </script>
 </body>
 </html>

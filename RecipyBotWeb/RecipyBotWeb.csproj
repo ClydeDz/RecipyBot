@@ -202,6 +202,12 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\2.png" />
+    <Content Include="Images\mocks-pro.png" />
+    <Content Include="Images\recipybot-webcover %281%29.png" />
+    <Content Include="Images\recipybot-webcover.png" />
+    <Content Include="Images\recipybot.png" />
+    <Content Include="Images\curve-bottom-short.svg" />
     <Content Include="Scripts\Vendor\bootstrap.js" />
     <Content Include="Scripts\Vendor\bootstrap.min.js" />
     <Content Include="PrivateSettings.config">
@@ -216,6 +222,11 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="fonts\Baloo-Regular.ttf" />
+    <Content Include="fonts\Fredoka dingbats.otf" />
+    <Content Include="fonts\FredokaOne-Regular.otf" />
+    <Content Include="fonts\Jellee-Roman.otf" />
+    <Content Include="Content\Modules\_menu.scss" />
     <None Include="Properties\PublishProfiles\recipybot - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\recipybot - Web Deploy.pubxml" />
     <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />
@@ -229,6 +240,9 @@
     <Content Include="Scripts\Vendor\modernizr-2.6.2.js" />
     <Content Include="Scripts\Vendor\respond.js" />
     <Content Include="Scripts\Vendor\respond.min.js" />
+    <Content Include="Scripts\Vendor\typed.custom.js" />
+    <Content Include="Scripts\Vendor\typed.js" />
+    <Content Include="Scripts\Vendor\typed.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -250,6 +264,7 @@
     <Content Include="Views\Home\Privacy.cshtml" />
     <Content Include="Views\Shared\_HeaderPartial.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
