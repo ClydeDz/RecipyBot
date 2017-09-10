@@ -110,30 +110,3 @@ font-weight: bold;
 .rb-row{
     padding: 18px 0;
 }
-
-/* footer */
-footer{
-    background-color: $dark-gray;
-    color: wheat;
-    padding: 18px 0;
-    margin-top: 45px;
-}
-
-footer ul li{
-    display: inline-block;
-    list-style: none;
-    margin-right: 9px;
-}
-
-footer ul li a, footer ul li a:active, footer ul li a:visited,
-footer a, footer a:active, footer a:visited{
-    color: wheat;
-    text-decoration: none;
-}
-
-
-footer ul li a:hover, footer ul li a:focus,
-footer a:hover, footer a:focus{
-    color: white;
-    text-decoration: underline;
-}

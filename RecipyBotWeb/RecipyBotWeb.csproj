@@ -227,6 +227,7 @@
     <Content Include="fonts\FredokaOne-Regular.otf" />
     <Content Include="fonts\Jellee-Roman.otf" />
     <Content Include="Content\Modules\_menu.scss" />
+    <Content Include="Content\Modules\_footer.scss" />
     <None Include="Properties\PublishProfiles\recipybot - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\recipybot - Web Deploy.pubxml" />
     <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />

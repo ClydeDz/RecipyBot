@@ -18,6 +18,10 @@
         <li>
             <a href="#">@Html.ActionLink("Get in touch", "Contact", "Home")</a>
         </li>
+        <li>
+            @{ViewBag.Year= System.DateTime.Now.Year.ToString(); }
+            <small>(c) <span>@ViewBag.Year</span> Clyde D'Souza</small>
+        </li>
     </ul>
 </nav>
 <!-- /#sidebar-wrapper -->
