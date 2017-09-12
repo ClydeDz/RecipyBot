@@ -2,6 +2,7 @@
 @import '_buttons';
 @import '_animation';
 @import '_menu';
+@import '_footer';
 
 @font-face {
     font-family: 'FredokaOne-Regular';
@@ -52,8 +53,8 @@ textarea {
 .website-header {
     background-color: transparent;
     position: absolute;
-    top:9px;
-    left: 9px;
+    top:18px;
+    left: 24px;
     z-index: 99;
 }
 
@@ -74,7 +75,7 @@ textarea {
 }
 
 .website-banner .website-logo {
-    padding-top: 15px;
+    padding-top: 30px;
     padding-bottom: 15px;
 }
 
@@ -109,4 +110,11 @@ font-weight: bold;
 
 .rb-row{
     padding: 18px 0;
+}
+
+
+/**/
+.field-validation-error{
+    color: red;
+    display: block;
 }

@@ -29,6 +29,21 @@ namespace RecipyBotWeb.Constants
             get { return ConfigurationManager.AppSettings["WebBotUrl"]; }
         }
 
+        public static string SendGridApiKey
+        {
+            get { return ConfigurationManager.AppSettings["SendGridApiKey"]; }
+        }
+
+        public static string GeneralToEmail
+        {
+            get { return ConfigurationManager.AppSettings["GeneralToEmail"]; }
+        }
+
+        public static string GeneralFromEmail
+        {
+            get { return ConfigurationManager.AppSettings["GeneralFromEmail"]; }
+        }
+
         public static string BotId
         {
             get { return ConfigurationManager.AppSettings["BotId"]; }

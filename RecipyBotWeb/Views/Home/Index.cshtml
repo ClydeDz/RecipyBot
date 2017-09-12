@@ -1,9 +1,11 @@
 ﻿@{
     ViewBag.Title = "";
 }
+
+<link href="~/Content/Vendor/device-mockups.min.css" rel="stylesheet" />
 <br />
 <div class="container rb-row">
-    <div class="row">
+    <div class="row rb-row">
         <div class="col-sm-7 text-center">
             <img src="~/Images/mocks-pro.png" width="400" />
         </div>
@@ -14,6 +16,25 @@
                 <a href="https://join.skype.com/bot/0cfd80bf-3358-44d8-b4ce-61bc16f4607d"><img alt="Add Bot to Skype" width="108" src="https://secure.skypeassets.com/content/dam/scom/images/add-bot-button/add-to-skype-buttons02-52px.png" /></a>
                 <a href='https://www.messenger.com/t/114031652599634'><img src='https://facebook.botframework.com/Content/MessageUs.png'></a>
             </p>
+        </div>
+    </div>
+    <div class="row rb-row">
+        <div class="col-sm-6">
+            <h2>Try a demo online!</h2>
+            <p>Use this interface to try the bot online without even leaving your browser.</p>
+        </div>
+        <div class="col-sm-6">
+            <div class="device-wrapper">
+                <div class="device" data-device="iPhone7" data-orientation="portrait" data-color="red">
+                    <div class="screen">
+                        <iframe src='https://webchat.botframework.com/embed/RecipyBot?s=@ViewBag.WebChatSecret' style="width: 256px; background-color: white; height: 459px;"></iframe>
+                    </div>
+                    <div class="button">
+                        <!-- You can hook the style="height: 500px; width: 350px;" "home button" to some JavaScript events or just remove it -->
+                    </div>
+                </div>
+            </div>
+           
         </div>
     </div>
 </div>

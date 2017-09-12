@@ -1,5 +1,9 @@
-﻿using System.Linq;
+﻿using RecipyBotWeb.Models;
+using RecipyBotWeb.Service;
+using System;
+using System.Diagnostics;
 using System.Web.Mvc;
+using RecipyBotWeb.Constants;
 
 namespace RecipyBotWeb.Controllers
 {
@@ -7,36 +11,49 @@ namespace RecipyBotWeb.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.WebChatSecret = BotConstants.BotApiSettings.WebChatSecret;
             return View();
         }
 
         public ActionResult About()
         {
-            string[] food = new string[]{"abc","def", "ghi"};
-            string foodD = string.Join(",",  food.Select(row => row).ToArray());
-            ViewBag.Message = "Your application description page." + foodD;
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        
         public ActionResult Privacy()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         
         public ActionResult Terms()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactUsDataModel contactUsFormData)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    EmailService.SendContactForm(contactUsFormData);
+                    return View("ContactSuccess");
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("Contact page post exception message - " + e.Message);
+                    return View("Error");
+                }
+            }
+            return View();
+        }
+
+        
     }
 }

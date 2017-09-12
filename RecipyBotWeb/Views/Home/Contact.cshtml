@@ -1,3 +1,48 @@
 ﻿@{
     ViewBag.Title = "Contact | ";
 }
+
+@model RecipyBotWeb.Models.ContactUsDataModel
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Contact us</h1>
+            <p>
+                Please feel free to get in touch with us at anytime if you have any suggestions, feedbacks, concerns, questions or just want to say hi!
+                We will get in touch with you as soon as possible.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { @name = "contactUsForm", @id = "contactUsForm" }))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, "Your full name")
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, "Your email")
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email)
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comments, "Your questions/queries (optional)")
+                    @Html.TextAreaFor(model => model.Comments, 5, 1, new { style = "max-width:517px;", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Comments)
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary submit-button" type="submit" value="Send" id="contactUsSubmit" />
+                </div>
+            }
+        </div>
+        <div class="col-sm-6">
+            <p>Sidebar</p>
+        </div>
+    </div>
+</div>

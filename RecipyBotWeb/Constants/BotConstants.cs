@@ -110,6 +110,11 @@ namespace RecipyBotWeb.Constants
             {
                 get { return ConfigurationManager.AppSettings["Bot:FlickrImageApi"]; }
             }
+
+            public static string WebChatSecret
+            {
+                get { return ConfigurationManager.AppSettings["Bot:WebChatSecret"]; }
+            }
         }       
     }
 }
