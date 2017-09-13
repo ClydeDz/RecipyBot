@@ -21,6 +21,7 @@ namespace RecipyBotWeb.Constants
             public const string GetStarted = "Get started";
             public const string GifRecipe = "Gif";
             public const string Version = "Version";
+            public const string Feedback = "Feedback";
 
             public const string VisitRecipeActionButton = "View this recipe";
         }
@@ -54,6 +55,12 @@ namespace RecipyBotWeb.Constants
             public const string RecipyTopN = "recipy.topn";
             public const string RecipyRandom = "recipy.random";
             public const string RecipyShowGif = "recipy.showgif";
+
+            public const string GeneralAbout = "general.about";
+            public const string GeneralGetStarted = "general.getstarted";
+            public const string GeneralHelp = "general.help";
+            public const string GeneralVersion = "general.version";
+            public const string GeneralFeedback = "general.feedback";
         }
 
         /// <summary>

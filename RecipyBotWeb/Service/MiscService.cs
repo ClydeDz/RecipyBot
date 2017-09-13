@@ -72,6 +72,36 @@ namespace RecipyBotWeb.Service
         {
             return gifUrl.Substring(0, gifUrl.Length - 1);
         }
+
+        public static int GetNumericEntity(Dictionary<string, object> paramters)
+        {
+            int x = 0;
+            foreach (var j in paramters)
+            {
+                if (j.Key == BotConstants.ApiAiParametersConstants.Number)
+                {
+                    x = Convert.ToInt32(j.Value ?? BotConstants.OtherConstants.DefaultTopN);
+                }
+            }
+            return x;
+        }
+
+        public static string GetFoodEntities(Dictionary<string, object> paramters)
+        {
+            string foodItem = string.Empty;
+            foreach (var j in paramters)
+            {
+                if (j.Key == BotConstants.ApiAiParametersConstants.FoodItem)
+                {
+                    foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultIngredientsSerialized : j.Value.ToString();
+                }
+                if (j.Key == BotConstants.ApiAiParametersConstants.Recipe)
+                {
+                    foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultRecipeDish : j.Value.ToString();
+                }
+            }
+            return foodItem;
+        }
     }
 
     #region EXTENSIONS

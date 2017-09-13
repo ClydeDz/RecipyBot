@@ -1,0 +1,5 @@
+﻿https://recipybot.azurewebsites.net
+https://recipybot.azurewebsites.net/About
+https://recipybot.azurewebsites.net/Contact
+https://recipybot.azurewebsites.net/Terms
+https://recipybot.azurewebsites.net/Privacy
