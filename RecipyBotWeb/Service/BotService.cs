@@ -40,12 +40,12 @@ namespace RecipyBotWeb.Service
                 else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.About))
                 {
                     // Return the about us message
-                    return AboutResponse(userMessage);
+                    return AboutResponse(userMessage, string.Empty);
                 }
                 else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.GetStarted) || MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Help))
                 {
                     // Returns the get started/help generic message
-                    return GetStartedResponse(userMessage);
+                    return GetStartedResponse(userMessage, string.Empty);
                 }
                 else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Version))
                 {
@@ -55,7 +55,7 @@ namespace RecipyBotWeb.Service
                 else if (MiscService.CompareTwoStrings(userMessage.Text, BotConstants.PreDefinedActions.Feedback))
                 {
                     // Returns the feedback response
-                    return VersionResponse(userMessage);
+                    return FeedbackResponse(userMessage, string.Empty);
                 }
                 else
                 {
@@ -93,8 +93,19 @@ namespace RecipyBotWeb.Service
 
         #region PRE DEFINED RESPONSES
 
-        public static Activity GetStartedResponse(Activity message)
+        public static Activity VersionResponse(Activity message)
         {
+            Activity replyToConversation = message.CreateReply("The Recipy Bot is currently running at version " + BotConstants.OtherConstants.Version);
+            return replyToConversation;
+        }
+
+        public static Activity GetStartedResponse(Activity message, string defaultResponse)
+        {
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                SendATextResponse(message, defaultResponse);
+            }
+
             Debug.WriteLine("Get Started Debug Writeline");
 
             string userGreeting = MiscService.IsUserNameDefaultOrBlank(message.From.Name) ? "Hi " + message.From.Name + "! " : string.Empty;
@@ -102,23 +113,27 @@ namespace RecipyBotWeb.Service
             return replyToConversation;
         }
 
-        public static Activity AboutResponse(Activity message)
+        public static Activity AboutResponse(Activity message, string defaultResponse)
         {
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                SendATextResponse(message, defaultResponse);
+            }
+
             string response = "The Recipy Bot is your virtual assistant that helps you in your mundane task of deciding what to cook. Just ask The Recipy Bot what you would like a recipe for or get ideas for recipes that include the ingredients you have on you.";
             SendATextResponse(message, response);
 
             Activity replyToConversation = message.CreateReply("This is developed by [Clyde D'Souza](https://clydedsouza.net).\n\nRecipes provided by [Recipe Puppy](http://www.recipepuppy.com/).");
             return replyToConversation;
-        }
+        }      
 
-        public static Activity VersionResponse(Activity message)
+        public static Activity FeedbackResponse(Activity message, string defaultResponse)
         {
-            Activity replyToConversation = message.CreateReply("The Recipy Bot is currently running at version "+ BotConstants.OtherConstants.Version);
-            return replyToConversation;
-        }
+            if (!string.IsNullOrEmpty(defaultResponse))
+            {
+                SendATextResponse(message, defaultResponse);
+            }
 
-        public static Activity FeedbackResponse(Activity message)
-        {
             string response = "We would love to hear your feedback. Please visit [our contact page](https://recipybot.azurewebsites.net/contact) to send us your feedback.";
             SendATextResponse(message, response);
 

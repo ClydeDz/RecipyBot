@@ -4,6 +4,8 @@ namespace RecipyBotWeb.Constants
 {
     public class SiteSettingsConstant
     {
+        #region BOT URLS
+
         public static string FacebookBotUrl
         {
             get { return ConfigurationManager.AppSettings["FacebookBotUrl"]; }
@@ -29,6 +31,10 @@ namespace RecipyBotWeb.Constants
             get { return ConfigurationManager.AppSettings["WebBotUrl"]; }
         }
 
+        #endregion
+
+        #region EMAILS
+
         public static string SendGridApiKey
         {
             get { return ConfigurationManager.AppSettings["SendGridApiKey"]; }
@@ -44,6 +50,15 @@ namespace RecipyBotWeb.Constants
             get { return ConfigurationManager.AppSettings["GeneralFromEmail"]; }
         }
 
+        public static string ContactUsSubjectLine
+        {
+            get { return ConfigurationManager.AppSettings["ContactUsSubjectLine"]; }
+        }
+
+        #endregion
+
+        #region MS BOT FRAMEWORK
+
         public static string BotId
         {
             get { return ConfigurationManager.AppSettings["BotId"]; }
@@ -58,6 +73,8 @@ namespace RecipyBotWeb.Constants
         {
             get { return ConfigurationManager.AppSettings["MicrosoftAppPassword"]; }
         }
+
+        #endregion
 
     }
 }
