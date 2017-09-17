@@ -6,16 +6,16 @@
 
 <br />
 <div class="container">
-    <div class="row">
+    <div class="row rb-row">
         <div class="col-sm-12">
-            <h1>Contact us</h1>
+            <h2>Contact us</h2>
             <p>
                 Please feel free to get in touch with us at anytime if you have any suggestions, feedbacks, concerns, questions or just want to say hi!
                 We will get in touch with you as soon as possible.
             </p>
         </div>
     </div>
-    <div class="row">
+    <div class="row rb-row">
         <div class="col-sm-6">
             @using (Html.BeginForm(null, null, FormMethod.Post, new { @name = "contactUsForm", @id = "contactUsForm" }))
             {
@@ -42,7 +42,9 @@
             }
         </div>
         <div class="col-sm-6">
-            <p>Sidebar</p>
+            <p>
+                @{ Html.RenderPartial("~/Views/Shared/_GetBotsPartial.cshtml");  }
+            </p>
         </div>
     </div>
 </div>

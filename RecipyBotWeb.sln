@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipyBotWeb", "RecipyBotWeb\RecipyBotWeb.csproj", "{714A4D57-78BD-4F97-A583-DB4C85B3DDB9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheRecipyBot", "TheRecipyBot\TheRecipyBot.csproj", "{2235AAE4-1BA0-4804-BB0C-6F67497A1257}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{714A4D57-78BD-4F97-A583-DB4C85B3DDB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{714A4D57-78BD-4F97-A583-DB4C85B3DDB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{714A4D57-78BD-4F97-A583-DB4C85B3DDB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2235AAE4-1BA0-4804-BB0C-6F67497A1257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2235AAE4-1BA0-4804-BB0C-6F67497A1257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2235AAE4-1BA0-4804-BB0C-6F67497A1257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2235AAE4-1BA0-4804-BB0C-6F67497A1257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

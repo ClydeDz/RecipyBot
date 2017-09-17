@@ -1,0 +1,17 @@
+﻿@using RecipyBotWeb.Constants;
+<div>
+    @if (SiteSettingsConstant.IsSkypeBotConfigured)
+    {
+        <a href="@SiteSettingsConstant.SkypeBotUrl" target="_blank"><img alt="Add Bot to Skype" width="108" src="https://secure.skypeassets.com/content/dam/scom/images/add-bot-button/add-to-skype-buttons02-52px.png" /></a>
+    }
+    @if (SiteSettingsConstant.IsFacebookBotConfigured)
+    {
+        <a href='@SiteSettingsConstant.FacebookBotUrl' target="_blank"><img src='https://facebook.botframework.com/Content/MessageUs.png'></a>
+    }
+    @if (SiteSettingsConstant.IsSlackBotConfigured)
+    {
+    }
+    @if (SiteSettingsConstant.IsTelegramBotConfigured)
+    {
+    }
+</div>

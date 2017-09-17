@@ -1,0 +1,27 @@
+﻿@font-face {
+    font-family: 'FredokaOne-Regular';
+    src: url('../../fonts/FredokaOne-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Jellee-Roman';
+    src: url('../../fonts/Jellee-Roman.otf') format('opentype');
+}
+
+$primary-font: 'Jellee-Roman', cursive, serif;
+$secondary-font: 'Roboto', sans-serif;
+
+
+body,
+.sidebar-nav li div {
+    font-family: $secondary-font;
+}
+
+h1, h2, h3,
+.h1, .h2, .h3,
+.website-typed-text,
+.loading-overlay,
+.sidebar-nav li a {
+    font-family: $primary-font;
+}
+

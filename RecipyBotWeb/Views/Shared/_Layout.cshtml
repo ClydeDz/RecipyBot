@@ -7,8 +7,10 @@
     <!-- wrapper -->
     <div id="wrapper">
 
+        <!-- overlay during open menu -->
         <div class="overlay"></div>
 
+        <!-- contents of the sidebar menu -->
         @{ Html.RenderPartial("~/Views/Shared/_MenuPartial.cshtml");  }
 
         <div id="page-content-wrapper">
@@ -27,8 +29,9 @@
                     <img src="~/Images/recipybot.png" alt="" width="150" />
                 </div>
                 <div class="text-center" id="typed-strings">
-                    <p>Hi! I'm Recipy Bot ^1000</p>
-                    <p>I help you with recipes ^1000</p>
+                    <p>Hi! I'm Recipy Bot</p>
+                    <p>I can help you with selecting recipes</p>
+                    <p>So that you can cook something really exciting for your loved ones</p>
                 </div>
                 <div class="text-center website-typed-text"><span id="typed"></span></div>
                 <div class="the-curve"></div>
@@ -46,43 +49,5 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-
-    <script>
-        var typed = new Typed('#typed', {
-            stringsElement: '#typed-strings',
-            typeSpeed: 40,
-            loop: true
-        });
-    </script>
-    <script>
-        $(document).ready(function () {
-            var trigger = $('.hamburger'),
-            overlay = $('.overlay'),
-            isClosed = false;
-
-            trigger.click(function () {
-                hamburger_cross();
-            });
-
-            function hamburger_cross() {
-
-                if (isClosed == true) {
-                    overlay.hide();
-                    trigger.removeClass('is-open');
-                    trigger.addClass('is-closed');
-                    isClosed = false;
-                } else {
-                    overlay.show();
-                    trigger.removeClass('is-closed');
-                    trigger.addClass('is-open');
-                    isClosed = true;
-                }
-            }
-
-            $('[data-toggle="offcanvas"]').click(function () {
-                $('#wrapper').toggleClass('toggled');
-            });
-        });
-    </script>
 </body>
 </html>

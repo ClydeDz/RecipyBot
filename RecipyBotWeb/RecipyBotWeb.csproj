@@ -212,6 +212,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\2.png" />
+    <Content Include="Images\assets\recipybot-features-gif.gif" />
     <Content Include="Images\icons\android-chrome-192x192.png" />
     <Content Include="Images\icons\apple-touch-icon-114x114.png" />
     <Content Include="Images\icons\apple-touch-icon-120x120.png" />
@@ -236,6 +237,7 @@
     <Content Include="Images\recipybot-webcover.png" />
     <Content Include="Images\recipybot.png" />
     <Content Include="Images\curve-bottom-short.svg" />
+    <Content Include="Scripts\Modules\main.js" />
     <Content Include="Scripts\Vendor\bootstrap.js" />
     <Content Include="Scripts\Vendor\bootstrap.min.js" />
     <Content Include="PrivateSettings.config">
@@ -256,6 +258,11 @@
     <Content Include="fonts\Jellee-Roman.otf" />
     <Content Include="Content\Modules\_menu.scss" />
     <Content Include="Content\Modules\_footer.scss" />
+    <Content Include="Content\Modules\_fonts.scss" />
+    <Content Include="Content\Modules\_websiteheader.scss" />
+    <Content Include="Content\Modules\_loader.scss" />
+    <Content Include="Content\Modules\_forms.scss" />
+    <Content Include="Content\Modules\_mobile.scss" />
     <None Include="Properties\PublishProfiles\recipybot - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\recipybot - Web Deploy.pubxml" />
     <None Include="Scripts\Vendor\jquery-1.10.2.intellisense.js" />
@@ -298,10 +305,11 @@
     <Content Include="Views\Shared\_MenuPartial.cshtml" />
     <Content Include="Views\Shared\ContactSuccess.cshtml" />
     <Content Include="Views\Shared\_GoogleAnalyticsPartial.cshtml" />
+    <Content Include="Views\Shared\_LoadingPartial.cshtml" />
+    <Content Include="Views\Shared\_GetBotsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\assets\" />
     <Folder Include="Images\banners\" />
   </ItemGroup>
   <ItemGroup>

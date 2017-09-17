@@ -31,6 +31,31 @@ namespace RecipyBotWeb.Constants
             get { return ConfigurationManager.AppSettings["WebBotUrl"]; }
         }
 
+        public static bool IsSkypeBotConfigured
+        {
+            get { return !string.IsNullOrEmpty(ConfigurationManager.AppSettings["SkypeBotUrl"]); }
+        }
+
+        public static bool IsFacebookBotConfigured
+        {
+            get { return !string.IsNullOrEmpty(ConfigurationManager.AppSettings["FacebookBotUrl"]); }
+        }
+
+        public static bool IsSlackBotConfigured
+        {
+            get { return !string.IsNullOrEmpty(ConfigurationManager.AppSettings["SlackBotUrl"]); }
+        }
+
+        public static bool IsTelegramBotConfigured
+        {
+            get { return !string.IsNullOrEmpty(ConfigurationManager.AppSettings["TelegramBotUrl"]); }
+        }
+
+        public static bool IsAnyBotConfigured
+        {
+            get { return (IsFacebookBotConfigured || IsSkypeBotConfigured || IsSlackBotConfigured || IsTelegramBotConfigured); }
+        }
+
         #endregion
 
         #region EMAILS

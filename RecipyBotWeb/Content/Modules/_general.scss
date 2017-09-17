@@ -1,125 +1,45 @@
-﻿@import '_colours';
+﻿/* VARIABLES */
+@import '_colours';
 @import '_buttons';
 @import '_animation';
-@import '_menu';
+@import '_fonts';
+
+/* COMPONENTS */
 @import '_footer';
+@import '_menu';
+@import '_loader';
+@import '_forms';
+@import '_websiteheader';
+@import '_mobile';
 
-@font-face {
-    font-family: 'FredokaOne-Regular';
-    src: url('../../fonts/FredokaOne-Regular.otf') format('opentype');
-}
 
-@font-face {
-    font-family: 'Jellee-Roman';
-    src: url('../../fonts/Jellee-Roman.otf') format('opentype');
-}
-
+/* GENERAL PURPOSE CSS */
 
 body {
     color: $dark-gray;
-    font-family: 'Roboto', sans-serif;
+    position: relative;
+    overflow-x: hidden;
 }
 
 h1, h2, h3,
 .h1, .h2, .h3 {
-    font-family: Jellee-Roman;
     color: $normal-accent;
 }
 
-.website-typed-text{
-    font-family: Jellee-Roman;
-}
-
-/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
-.website-header {
-    background-color: transparent;
-    position: absolute;
-    top:18px;
-    left: 24px;
-    z-index: 99;
-}
-
-.website-header h1, .website-header h1 a, .website-header h1 a:active, .website-header h1 a:visited{
-    margin: 0;
-    padding: 9px 2px;
-    font-size: 2vh;
-    color: white;
-}
-
-.website-header h1 a:hover{
-    text-decoration:none;
-    color: white;
-}
-
-.website-banner {
-    /*background-color: $light-accent;*/
-    background-image: url('../../Images/recipybot-webcover (1).png');
-    background-position: center;
-    height: 400px;
-    display: block;
-    position: relative;
-}
-
-.website-banner .website-logo {
-    padding-top: 30px;
-    padding-bottom: 15px;
-}
-
-.website-banner .website-logo img {
-    text-align: center;
-    width: 135px;
-}
-
-.the-curve {
-    background-image: url( ../../Images/curve-bottom-short.svg);
-    background-position: center bottom;
-    background-size: 180%;
-    background-repeat: no-repeat;
-    height: 130px;
-    width: 100%;
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-    background-size: 150%;
-    height: 100px;
-}
-
-.website-banner .website-typed-text{
-color: white;
-font-size: 6vh;
-font-weight: bold;
-   text-shadow:  2px 2px 8px $dark-accent;
-}
-
-
 .rb-row{
-    padding: 18px 0;
+    padding: 28px 0;
 }
 
-
-/**/
-.field-validation-error{
-    color: red;
-    display: block;
+.device-wrapper{
+    margin-left: auto;
+    margin-right: auto;
 }

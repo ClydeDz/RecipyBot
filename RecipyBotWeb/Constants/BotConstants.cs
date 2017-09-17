@@ -61,6 +61,7 @@ namespace RecipyBotWeb.Constants
             public const string GeneralHelp = "general.help";
             public const string GeneralVersion = "general.version";
             public const string GeneralFeedback = "general.feedback";
+            public const string GeneralSmallTalk = "general.smalltalk";
         }
 
         /// <summary>

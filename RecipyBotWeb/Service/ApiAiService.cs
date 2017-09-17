@@ -70,6 +70,10 @@ namespace RecipyBotWeb.Service
                     // Returns a generic feedback response
                     case BotConstants.ApiAiActionConstants.GeneralFeedback:
                         return BotService.FeedbackResponse(message, response.Result.Fulfillment.Speech);
+                    
+                    // Returns a response from API.AI for general smalltalk
+                    case BotConstants.ApiAiActionConstants.GeneralSmallTalk:
+                        return message.CreateReply(response.Result.Fulfillment.Speech);
 
                     // Returns a response from API.AI directly
                     default:

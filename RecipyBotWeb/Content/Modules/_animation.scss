@@ -1,1 +1,53 @@
-﻿
+﻿@mixin animate-all-ease($value) {
+    -webkit-transition: all $value ease;
+    -moz-transition: all $value ease;
+    -o-transition: all $value ease;
+    transition: all $value ease;
+}
+
+@mixin animate-all-fade($value) {
+    -webkit-transition: all $value ease;
+    -moz-transition: all $value ease;
+    -o-transition: all $value ease;
+    transition: all $value ease;
+}
+
+
+@mixin animate-all-ease-in-out($value) {
+    -webkit-transition: all $value ease-in-out;
+    -moz-transition: all $value ease-in-out;
+    -o-transition: all $value ease-in-out;
+    transition: all $value ease-in-out;
+}
+
+@mixin animate-width-ease($value) {
+    -webkit-transition: width $value ease-in;
+    -moz-transition: width $value ease-in;
+    -o-transition: width $value ease-in;
+    transition: width $value ease-in;
+}
+
+.transition-all {
+     transition: all .2s;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+}
+
+.off-focus{
+    zoom: 1;
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+}
+
+.off-focus-light{
+    zoom: 1;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+
+.off-focus-dark{
+    zoom: 1;
+	filter: alpha(opacity=100);
+	opacity: 1;
+}

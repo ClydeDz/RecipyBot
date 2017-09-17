@@ -1,26 +1,57 @@
-﻿<footer>
-    <div class="container-fluid"> 
+﻿@using RecipyBotWeb.Constants;
+
+<footer>
+    <div class="container"> 
         <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                    <div>
-                        <ul>
-                            <li>Message me:</li>
-                            <li><a href="#"><i class="mdi mdi-facebook-messenger mdi-24px" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="mdi mdi-skype mdi-24px" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="mdi mdi-slack mdi-24px" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="mdi mdi-telegram mdi-24px" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
-                            <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
-                            <li>@Html.ActionLink("Get in touch", "Contact", "Home")</li>
-                        </ul>
-                    </div>
+            <div class="col-xs-12 col-sm-4">
+                <div>
+                    <h3>Site map</h3>
+                </div>
+                <div>
+                    <ul>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
+                        <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
+                        <li>@Html.ActionLink("Get in touch", "Contact", "Home")</li>
+                    </ul>
+                </div>                
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">   
+                <div>
+                    @if (SiteSettingsConstant.IsAnyBotConfigured)
+                    {
+                        <h3>Get it now</h3>
+                    }
+                    else
+                    {
+                        <h3>Bots will be published soon</h3>
+                    }
+                </div>            
+                <div>
+                    <ul>
+                        @if (SiteSettingsConstant.IsSkypeBotConfigured)
+                        {
+                            <li><a href='@SiteSettingsConstant.SkypeBotUrl' target="_blank"><i class="mdi mdi-skype mdi-24px" aria-hidden="true"></i></a></li>
+                        }
+                        @if (SiteSettingsConstant.IsFacebookBotConfigured)
+                        {
+                            <li><a href='@SiteSettingsConstant.FacebookBotUrl' target="_blank"><i class="mdi mdi-facebook-messenger mdi-24px" aria-hidden="true"></i></a></li>
+                        }
+                        @if (SiteSettingsConstant.IsSlackBotConfigured)
+                        {
+                            <li><a href="@SiteSettingsConstant.SlackBotUrl"><i class="mdi mdi-slack mdi-24px" aria-hidden="true"></i></a></li>
+                        }
+                        @if (SiteSettingsConstant.IsTelegramBotConfigured)
+                        {
+                            <li><a href="@SiteSettingsConstant.TelegramBotUrl"><i class="mdi mdi-telegram mdi-24px" aria-hidden="true"></i></a></li>
+                        }
+                    </ul>
+                </div> 
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div>
+                    <h3><img src="~/Images/recipybot-grayscale.png" width="26" /></h3>
+                </div>   
                 <p>&copy; The Recipy Bot @DateTime.Now.Year <a href="https://clydedsouza.net" title="Visit Clyde's website">Clyde D'Souza</a></p>
             </div>
         </div>

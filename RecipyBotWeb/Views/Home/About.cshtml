@@ -2,15 +2,22 @@
     ViewBag.Title = "About | ";
 }
 <br />
-<div class="container rb-row">
-    <div class="row">
+<div class="container">
+    <div class="row rb-row">
         <div class="col-sm-12">
             <h2>About</h2>
-            <p>Lorem ipsum Lorem ipsum Lorem ipsum vLorem ipsum Lorem ipsumLorem ipsum Lorem ipsum</p>
-            <p>Get it now!</p>
             <p>
-                <a href="https://join.skype.com/bot/0cfd80bf-3358-44d8-b4ce-61bc16f4607d"><img alt="Add Bot to Skype" width="108" src="https://secure.skypeassets.com/content/dam/scom/images/add-bot-button/add-to-skype-buttons02-52px.png" /></a>
-                <a href='https://www.messenger.com/t/114031652599634'><img src='https://facebook.botframework.com/Content/MessageUs.png'></a>
+                The Recipy Bot makes it easier for you to decide what to cook today. 
+                The Recipy Bot can suggest recipes for a dish you ask about or if you just send the bot the ingredients you have on you. 
+                You can also ask the bot for the special's of the day and try cooking something (possibly) new for your loved ones. 
+            </p>
+        </div>
+    </div>
+    <div class="row rb-row">
+        <div class="col-sm-12">
+            <h2>Get it now!</h2>
+            <p>
+                @{ Html.RenderPartial("~/Views/Shared/_GetBotsPartial.cshtml");  }
             </p>
         </div>
     </div>

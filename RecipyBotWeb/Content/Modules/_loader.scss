@@ -1,0 +1,27 @@
+﻿/* VARIABLES */
+@import '_colours';
+@import '_animation';
+@import '_fonts';
+
+.loading-overlay{
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba($normal-accent, 0.99);
+    z-index: 999;
+    color: white;
+}
+
+.loading-overlay div{
+    margin-top:30vh;
+}
+
+.loading-overlay h2{
+    color: white;
+}
+
