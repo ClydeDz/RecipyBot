@@ -211,7 +211,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\2.png" />
+    <Content Include="Images\assets\getitnow.png" />
+    <Content Include="Images\banners\recipybot-site-teaser.png" />
+    <Content Include="Images\icons\2.png" />
     <Content Include="Images\assets\blackiphone.gif" />
     <Content Include="Images\assets\recipeoftheday-screen.gif" />
     <Content Include="Images\assets\recipybot-features-gif.gif" />
@@ -235,12 +237,10 @@
     <Content Include="Images\icons\mediumtile.png" />
     <Content Include="Images\icons\smalltile.png" />
     <Content Include="Images\icons\widetile.png" />
-    <Content Include="Images\mocks-pro.png" />
-    <Content Include="Images\recipybot-grayscale.png" />
-    <Content Include="Images\recipybot-webcover %281%29.png" />
-    <Content Include="Images\recipybot-webcover.png" />
-    <Content Include="Images\recipybot.png" />
-    <Content Include="Images\curve-bottom-short.svg" />
+    <Content Include="Images\icons\recipybot-grayscale.png" />
+    <Content Include="Images\assets\webcover.png" />
+    <Content Include="Images\icons\recipybot.png" />
+    <Content Include="Images\assets\curve-bottom-short.svg" />
     <Content Include="Scripts\Modules\main.js" />
     <Content Include="Scripts\Vendor\bootstrap.js" />
     <Content Include="Scripts\Vendor\bootstrap.min.js" />
@@ -315,7 +315,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\banners\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

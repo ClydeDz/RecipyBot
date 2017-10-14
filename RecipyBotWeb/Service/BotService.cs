@@ -108,7 +108,7 @@ namespace RecipyBotWeb.Service
 
             Debug.WriteLine("Get Started Debug Writeline");
 
-            string userGreeting = MiscService.IsUserNameDefaultOrBlank(message.From.Name) ? "Hi " + message.From.Name + "! " : string.Empty;
+            string userGreeting = MiscService.IsUserNameDefaultOrBlank(message.From.Name) ? "Hi " + message.From.Name.Split(' ')[0] + "! " : string.Empty;
             Activity replyToConversation = message.CreateReply(userGreeting + "To get started, simple type something like the following:\n\n * Show me the top 5 recipes\n\n * Show me a recipe with chicken and basil\n\n * Show me a recipe for risotto\n\n * Show me todays special.\n\n Recipy Bot is always online so feel free to send me a message anytime.");
             return replyToConversation;
         }

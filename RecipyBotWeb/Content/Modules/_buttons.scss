@@ -4,10 +4,11 @@
 @import '_fonts';
 
 
-@mixin generic-button($bg-color) {
+@mixin generic-button($bg-color, $fg-color) {
     @extend .transition-all;
     background-color: $bg-color;
-    border: 0 solid transparent;
+    color: $fg-color;
+    border: 1px solid $fg-color;
     padding: 9px 18px;
     border-radius: 30px;
     outline: none;
@@ -15,33 +16,33 @@
     margin-right: 9px;   
 }
 
-@mixin generic-button-hover($bg-color) {
+@mixin generic-button-hover($bg-color, $fg-color) {
     background-color: $bg-color;
-    border: 0 solid transparent;
+    border: 1px solid $fg-color;
+    color: $fg-color;
     text-decoration: none;
 }
 
 
 .submit-button {
-    &:active, &:visited {
-        @include generic-button($normal-accent);
-    }    
+    @include generic-button($normal-accent, white);
+
+    &:active, &:visited {    
+    }   
+     
     &:hover, &:focus {
-        @include generic-button-hover(darken($normal-accent, 15%));
+        @include generic-button-hover(darken($normal-accent, 15%), white);
     }
 }
 
 .getbot {
-    &:active, &:visited {
-        @include generic-button(white);
-        color: $social-blue;
-        border: 1px solid $social-blue;
+    @include generic-button(white, $social-blue);
+
+    &:active, &:visited {    
     } 
 
     &:hover, &:focus {
-         @include generic-button-hover(white);
-         color: darken($social-blue, 10%);
-         border: 1px solid darken($social-blue, 10%);
+         @include generic-button-hover(white, darken($social-blue, 10%));
     }
        
     i {

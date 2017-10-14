@@ -2,11 +2,14 @@
 
     /* WEBSITE HEADER */
     .website-header {
+        top: -10px;
+
          h1 {
              a {
-                 &:active, &:visited{
-                    font-size: 3vh;
-                    padding-left: 0;
+                 font-size: 3vh;
+                 padding-left: 0;
+
+                 &:active, &:visited{  
                  }                 
              }
          }       

@@ -5,17 +5,19 @@
 .website-header {
     background-color: transparent;
     position: absolute;
-    top:18px;
+    top:0;
     left: 24px;
     z-index: 99;
 
     h1 {
         a {
-            &:active, &:visited {
-                margin: 0;
-                padding: 9px 2px;
-                font-size: 2.5vh;
-                color: white;
+            font-size: 2.5vh;
+            margin: 0;
+            padding: 9px 2px;                
+            color: white;
+
+            &:active, &:visited {  
+                text-decoration:none;              
             }
 
             &:hover {
@@ -27,7 +29,7 @@
 }
 
 .website-banner {
-    background-image: url('../../Images/recipybot-webcover (1).png');
+    background-image: url('../../Images/assets/webcover.png');
     background-position: center;
     height: 400px;
     display: block;
@@ -53,7 +55,7 @@
 }
 
 .the-curve {
-    background-image: url( ../../Images/curve-bottom-short.svg);
+    background-image: url( ../../Images/assets/curve-bottom-short.svg);
     background-position: center bottom;
     background-size: 180%;
     background-repeat: no-repeat;

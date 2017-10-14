@@ -1,7 +1,7 @@
 ﻿/* STARTING POINT OF COMPILING SCSS */
 /* VARIABLES */
 /* VARIABLES */
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -43,43 +43,40 @@ h1, h2, h3,
 .sidebar-nav li a {
   font-family: "Jellee-Roman", cursive, serif; }
 
-.submit-button:active, .submit-button:visited {
+.submit-button {
   background-color: #f8ad32;
-  border: 0 solid transparent;
+  color: white;
+  border: 1px solid white;
   padding: 9px 18px;
   border-radius: 30px;
   outline: none;
   text-decoration: none;
   margin-right: 9px; }
+  .submit-button:hover, .submit-button:focus {
+    background-color: #d68807;
+    border: 1px solid white;
+    color: white;
+    text-decoration: none; }
 
-.submit-button:hover, .submit-button:focus {
-  background-color: #d68807;
-  border: 0 solid transparent;
-  text-decoration: none; }
-
-.getbot:active, .getbot:visited {
+.getbot {
   background-color: white;
-  border: 0 solid transparent;
+  color: #1DA1F2;
+  border: 1px solid #1DA1F2;
   padding: 9px 18px;
   border-radius: 30px;
   outline: none;
   text-decoration: none;
-  margin-right: 9px;
-  color: #1DA1F2;
-  border: 1px solid #1DA1F2; }
+  margin-right: 9px; }
+  .getbot:hover, .getbot:focus {
+    background-color: white;
+    border: 1px solid #0c85d0;
+    color: #0c85d0;
+    text-decoration: none; }
+  .getbot i {
+    position: relative;
+    top: 3px; }
 
-.getbot:hover, .getbot:focus {
-  background-color: white;
-  border: 0 solid transparent;
-  text-decoration: none;
-  color: #0c85d0;
-  border: 1px solid #0c85d0; }
-
-.getbot i {
-  position: relative;
-  top: 3px; }
-
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -122,7 +119,7 @@ h1, h2, h3,
   font-family: "Jellee-Roman", cursive, serif; }
 
 /* COMPONENTS */
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -153,26 +150,30 @@ footer {
   footer h3 {
     color: wheat; }
   footer ul {
+    padding-left: 0;
     -webkit-padding-start: 0; }
     footer ul li {
       display: inline-block;
       list-style: none;
       margin-right: 9px; }
-      footer ul li a:active, footer ul li a:visited {
+      footer ul li a {
         color: wheat; }
-      footer ul li a:hover, footer ul li a:focus {
-        color: white;
-        text-decoration: underline; }
-  footer a:active, footer a:visited {
+        footer ul li a:active, footer ul li a:visited {
+          color: wheat; }
+        footer ul li a:hover, footer ul li a:focus {
+          color: white;
+          text-decoration: underline; }
+  footer a {
     color: wheat; }
-  footer a:hover, footer a:focus {
-    color: white;
-    text-decoration: underline; }
+    footer a:active, footer a:visited {
+      color: wheat; }
+    footer a:hover, footer a:focus {
+      color: white;
+      text-decoration: underline; }
   footer .col-sm-4.col-xs-12 {
     line-height: 29px; }
 
-/* VARIABLES */
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -253,22 +254,23 @@ html {
   width: 220px;
   right: 220px; }
 
-#page-content-wrapper {
-  width: 100%; }
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-left: -220px;
+  width: 100%;
+  -webkit-transition: all 0.8s ease;
+  -moz-transition: all 0.8s ease;
+  -o-transition: all 0.8s ease;
+  transition: all 0.8s ease; }
 
+/*#page-content-wrapper {
+   
+}*/
 #wrapper #page-content-wrapper {
   -webkit-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   -o-transition: all 0.4s ease;
   transition: all 0.4s ease; }
-
-#wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-left: -220px;
-  -webkit-transition: all 0.8s ease;
-  -moz-transition: all 0.8s ease;
-  -o-transition: all 0.8s ease;
-  transition: all 0.8s ease; }
 
 /* SIDEBAR NAV STYLES */
 .sidebar-nav {
@@ -491,8 +493,7 @@ html {
   background-color: rgba(250, 250, 250, 0.8);
   z-index: 1; }
 
-/* VARIABLES */
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -546,15 +547,12 @@ h1, h2, h3,
   background-color: rgba(248, 173, 50, 0.99);
   z-index: 999;
   color: white; }
+  .loading-overlay div {
+    margin-top: 30vh; }
+  .loading-overlay h2 {
+    color: white; }
 
-.loading-overlay div {
-  margin-top: 30vh; }
-
-.loading-overlay h2 {
-  color: white; }
-
-/* VARIABLES */
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -606,7 +604,7 @@ select,
 textarea {
   max-width: 280px; }
 
-.transition-all, .submit-button:active, .submit-button:visited, .getbot:active, .getbot:visited {
+.transition-all, .submit-button, .getbot {
   transition: all .2s;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -651,20 +649,22 @@ h1, h2, h3,
 .website-header {
   background-color: transparent;
   position: absolute;
-  top: 18px;
+  top: 0;
   left: 24px;
   z-index: 99; }
-  .website-header h1 a:active, .website-header h1 a:visited {
+  .website-header h1 a {
+    font-size: 2.5vh;
     margin: 0;
     padding: 9px 2px;
-    font-size: 2.5vh;
     color: white; }
-  .website-header h1 a:hover {
-    text-decoration: none;
-    color: white; }
+    .website-header h1 a:active, .website-header h1 a:visited {
+      text-decoration: none; }
+    .website-header h1 a:hover {
+      text-decoration: none;
+      color: white; }
 
 .website-banner {
-  background-image: url("../../Images/recipybot-webcover (1).png");
+  background-image: url("../../Images/assets/webcover.png");
   background-position: center;
   height: 400px;
   display: block;
@@ -683,7 +683,7 @@ h1, h2, h3,
     text-shadow: 2px 2px 4px #f8ad32; }
 
 .the-curve {
-  background-image: url(../../Images/curve-bottom-short.svg);
+  background-image: url(../../Images/assets/curve-bottom-short.svg);
   background-position: center bottom;
   background-size: 180%;
   background-repeat: no-repeat;
@@ -749,9 +749,11 @@ ul.getbot-icons {
 
 @media (max-width: 543px) {
   /* WEBSITE HEADER */
-  .website-header h1 a:active, .website-header h1 a:visited {
-    font-size: 3vh;
-    padding-left: 0; }
+  .website-header {
+    top: -10px; }
+    .website-header h1 a {
+      font-size: 3vh;
+      padding-left: 0; }
   .website-banner .website-logo img {
     width: 90px;
     padding-top: 32px; }

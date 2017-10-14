@@ -1,5 +1,4 @@
-﻿/* VARIABLES */
-@import '_colours';
+﻿@import '_colours';
 @import '_animation';
 @import '_fonts';
 
@@ -16,7 +15,6 @@ html {
 
 
 /* WRAPPERS */
-
 #wrapper {
     padding-left: 0;
     @include animate-all-ease(.8s);
@@ -40,28 +38,30 @@ html {
     }
 }
 
-#wrapper.toggled #sidebar-wrapper {
-    width: 220px;
-    right: 220px;
+#wrapper.toggled {
+    #sidebar-wrapper {
+        width: 220px;
+        right: 220px;
+    }
+
+    #page-content-wrapper {
+        position: absolute;
+        margin-left: -220px;
+        width: 100%;
+        @include animate-all-ease(.8s);
+    }
 }
 
-#page-content-wrapper {
-    width: 100%;
-}
+/*#page-content-wrapper {
+   
+}*/
 
 #wrapper #page-content-wrapper {
     @include animate-all-ease(.4s);
 }
 
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-left: -220px;
-    @include animate-all-ease(.8s);
-}
-
 
 /* SIDEBAR NAV STYLES */
-
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -154,7 +154,6 @@ html {
 
 
 /* HAMBURGER CROSS */
-
 .hamburger {
     position: absolute;
     top: 20px;
@@ -292,7 +291,6 @@ html {
 
 
 /* OVERLAY */
-
 .overlay {
     position: fixed;
     display: none;
