@@ -19,6 +19,9 @@
             @Html.ActionLink("Get in touch", "Contact", "Home")
         </li>
         <li>
+            @{ Html.RenderPartial("~/Views/Shared/_GetBotsIconsOnlyPartial.cshtml");  }
+        </li>
+        <li>
             <div class="text-center">
                 <img src="~/Images/recipybot-grayscale.png" alt="The Recipy Bot grayscale image" width="36" />
             </div>

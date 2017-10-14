@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "";
+    ViewBag.Title = "Your Virtual Friend Who Suggests You The Best Recipes | ";
 }
 
 @using RecipyBotWeb.Constants;
@@ -12,11 +12,30 @@
 <div class="container rb-row">
     <div class="row rb-row">
         <div class="col-sm-7 text-center">
-            <img src="~/Images/mocks-pro.png" width="400" class="mock-images"/>
+            <div class="device-wrapper special-device left-device">
+                <div class="device" data-device="iPhone7" data-orientation="portrait" data-color="red">
+                    <div class="screen">
+                        <img src="~/Images/assets/recipeoftheday-screen.gif" class="mock-images" />
+                    </div>
+                    <div class="button">
+                    </div>
+                </div>
+            </div>
+            <div class="device-wrapper special-device right-device">
+                <div class="device" data-device="iPhone5" data-orientation="portrait" data-color="black">
+                    <div class="screen">
+                        <img src="~/Images/assets/showrecipe-screen.gif" class="mock-images" />
+                    </div>
+                    <div class="button">
+                    </div>
+                </div>
+            </div>
+            @*<img src="~/Images/assets/blackiphone.gif" width="250" class="mock-images"/>
+            <img src="~/Images/assets/whiteiphone.gif" width="250" class="mock-images" />*@
         </div>
         <div class="col-sm-5">
             <h2>The Recipy Bot <br />is now available <br /> on these platforms</h2>
-            <p>Just click on anyone of the link below and add The Recipy Bot to your contacts.</p>
+            <p>Just click on anyone of the link below 👇 🙏 and add The Recipy Bot to your contacts 📱.</p>
             <p>
                @{ Html.RenderPartial("~/Views/Shared/_GetBotsPartial.cshtml");  }     
             </p>
@@ -26,8 +45,8 @@
         <div class="col-md-8">
             <h2>Try a demo online!</h2>
             <p>
-            Whether its asking about the specials of the day or the top 5 recipes. 
-            Or maybe you have some ingredients on you and you're asking what you can cook with those or just want to send someone some random thoughts,   
+            Whether its asking about the specials of the day 🍜 or the top 5 ✋ recipes. 
+            Or maybe you have some ingredients 🍗 🍓 🍙 on you and you're asking what you can cook with those or just want to send someone some random thoughts 🙇,   
             whatever the scenario is, you can use this interface to try the bot online without even having to leave your browser.
             </p>
             <p class="text-center">

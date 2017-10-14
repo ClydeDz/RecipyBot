@@ -9,6 +9,7 @@
                 </div>
                 <div>
                     <ul>
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Privacy", "Privacy", "Home")</li>
                         <li>@Html.ActionLink("Terms", "Terms", "Home")</li>
@@ -28,29 +29,12 @@
                     }
                 </div>            
                 <div>
-                    <ul>
-                        @if (SiteSettingsConstant.IsSkypeBotConfigured)
-                        {
-                            <li><a href='@SiteSettingsConstant.SkypeBotUrl' target="_blank"><i class="mdi mdi-skype mdi-24px" aria-hidden="true"></i></a></li>
-                        }
-                        @if (SiteSettingsConstant.IsFacebookBotConfigured)
-                        {
-                            <li><a href='@SiteSettingsConstant.FacebookBotUrl' target="_blank"><i class="mdi mdi-facebook-messenger mdi-24px" aria-hidden="true"></i></a></li>
-                        }
-                        @if (SiteSettingsConstant.IsSlackBotConfigured)
-                        {
-                            <li><a href="@SiteSettingsConstant.SlackBotUrl"><i class="mdi mdi-slack mdi-24px" aria-hidden="true"></i></a></li>
-                        }
-                        @if (SiteSettingsConstant.IsTelegramBotConfigured)
-                        {
-                            <li><a href="@SiteSettingsConstant.TelegramBotUrl"><i class="mdi mdi-telegram mdi-24px" aria-hidden="true"></i></a></li>
-                        }
-                    </ul>
+                    @{ Html.RenderPartial("~/Views/Shared/_GetBotsIconsOnlyPartial.cshtml");  }
                 </div> 
             </div>
             <div class="col-xs-12 col-sm-4">
                 <div>
-                    <h3><img src="~/Images/recipybot-grayscale.png" width="26" /></h3>
+                    <h3><img src="~/Images/icons/favicon-32x32.png" width="26" /></h3>
                 </div>   
                 <p>&copy; The Recipy Bot @DateTime.Now.Year <a href="https://clydedsouza.net" title="Visit Clyde's website">Clyde D'Souza</a></p>
             </div>

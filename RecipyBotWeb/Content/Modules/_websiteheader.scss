@@ -2,26 +2,28 @@
 @import '_animation';
 @import '_fonts';
 
-
 .website-header {
     background-color: transparent;
     position: absolute;
     top:18px;
     left: 24px;
     z-index: 99;
-}
 
-.website-header h1, .website-header h1 a, 
-.website-header h1 a:active, .website-header h1 a:visited{
-    margin: 0;
-    padding: 9px 2px;
-    font-size: 2vh;
-    color: white;
-}
+    h1 {
+        a {
+            &:active, &:visited {
+                margin: 0;
+                padding: 9px 2px;
+                font-size: 2.5vh;
+                color: white;
+            }
 
-.website-header h1 a:hover{
-    text-decoration:none;
-    color: white;
+            &:hover {
+                text-decoration:none;
+                color: white;
+            }
+        }
+    }
 }
 
 .website-banner {
@@ -31,16 +33,23 @@
     display: block;
     position: relative;
     background-attachment: fixed;
-}
+    
+    .website-logo {
+        padding-top: 30px;
+        padding-bottom: 15px;
 
-.website-banner .website-logo {
-    padding-top: 30px;
-    padding-bottom: 15px;
-}
-
-.website-banner .website-logo img {
-    text-align: center;
-    width: 135px;
+        img {
+            text-align: center;
+            width: 135px;
+        }
+    }
+    
+    .website-typed-text{
+        color: white;
+        font-size: 5vh;
+        font-weight: bold;
+        text-shadow:  2px 2px 4px $normal-accent;
+    }
 }
 
 .the-curve {
@@ -59,9 +68,4 @@
     height: 100px;
 }
 
-.website-banner .website-typed-text{
-    color: white;
-    font-size: 6vh;
-    font-weight: bold;
-    text-shadow:  2px 2px 4px $normal-accent;
-}
+

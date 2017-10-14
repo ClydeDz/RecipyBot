@@ -1,25 +1,54 @@
 ﻿@media (max-width: 543px) {
-    
+
     /* WEBSITE HEADER */
-    
-    .website-header h1, .website-header h1 a, .website-header h1 a:active, .website-header h1 a:visited{
+    .website-header {
+         h1 {
+             a {
+                 &:active, &:visited{
+                    font-size: 3vh;
+                    padding-left: 0;
+                 }                 
+             }
+         }       
     }
 
-    .website-banner .website-logo img{
-        width: 90px;
-        padding-top: 32px;
+    .website-banner  {
+        .website-logo img{
+            width: 90px;
+            padding-top: 32px;
+        }
+
+        .website-typed-text {
+            font-size: 5vh;
+        }    
     }
 
-    .website-banner .website-typed-text{
-        font-size: 5vh;
+    /* HOME SCREEN MOBILE DEMOS */
+    .device-wrapper.special-device {
+        max-width: 160px;
+        display: inline-block; 
+               
+        &.right-device {
+            max-width: 130px;
+            z-index: 9;
+            position: relative;
+            left: -29px;
+
+            .mock-images {
+                width: 112px;
+            }
+        }        
+
+        &.left-device {
+            z-index: 10;
+
+            .mock-images {
+                width: 138px;
+            }
+        }
     }
 
-    /**/
-    .mock-images{
-        width: 250px;
-    }
-
-    .mock-gifs{
+    .mock-gifs {
         width: 310px;
     }
 }

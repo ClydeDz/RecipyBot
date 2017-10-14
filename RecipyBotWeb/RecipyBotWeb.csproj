@@ -212,7 +212,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\2.png" />
+    <Content Include="Images\assets\blackiphone.gif" />
+    <Content Include="Images\assets\recipeoftheday-screen.gif" />
     <Content Include="Images\assets\recipybot-features-gif.gif" />
+    <Content Include="Images\assets\showrecipe-screen.gif" />
+    <Content Include="Images\assets\whiteiphone.gif" />
     <Content Include="Images\icons\android-chrome-192x192.png" />
     <Content Include="Images\icons\apple-touch-icon-114x114.png" />
     <Content Include="Images\icons\apple-touch-icon-120x120.png" />
@@ -307,6 +311,7 @@
     <Content Include="Views\Shared\_GoogleAnalyticsPartial.cshtml" />
     <Content Include="Views\Shared\_LoadingPartial.cshtml" />
     <Content Include="Views\Shared\_GetBotsPartial.cshtml" />
+    <Content Include="Views\Shared\_GetBotsIconsOnlyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

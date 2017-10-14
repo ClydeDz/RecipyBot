@@ -10,8 +10,8 @@
         <div class="col-sm-12">
             <h2>Contact us</h2>
             <p>
-                Please feel free to get in touch with us at anytime if you have any suggestions, feedbacks, concerns, questions or just want to say hi!
-                We will get in touch with you as soon as possible.
+                Please feel free to get in touch 📞 with us at anytime if you have any suggestions, feedbacks, concerns, questions or just want to say hi 👋!
+                We will get in touch with you as soon as possible 😇.
             </p>
         </div>
     </div>
@@ -22,18 +22,18 @@
                 @Html.ValidationSummary(true)
                 <div class="form-group">
                     @Html.LabelFor(model => model.Name, "Your full name")
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", style = "max-width:517px;" } })
                     @Html.ValidationMessageFor(model => model.Name)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Email, "Your email")
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", style = "max-width:517px; " } })
                     @Html.ValidationMessageFor(model => model.Email)
                     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Comments, "Your questions/queries (optional)")
-                    @Html.TextAreaFor(model => model.Comments, 5, 1, new { style = "max-width:517px;", @class = "form-control" })
+                    @Html.TextAreaFor(model => model.Comments, 5, 1, new { style = "max-width:517px; max-height:250px;", @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Comments)
                 </div>
                 <div class="form-group">

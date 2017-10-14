@@ -99,11 +99,13 @@ html {
         background-color: $normal-accent;
     }
 
+    li:nth-child(6) a, li:nth-child(6):before, li:nth-child(6):before,
+    .getbot-icons li:before,
     li:first-child a, li:first-child:before, li:last-child:before {
         color: wheat;
         background-color: $dark-gray;
     }
-
+    
     li:first-child:hover:before, li:last-child:hover:before {
         color: white;
         background-color: $dark-gray;

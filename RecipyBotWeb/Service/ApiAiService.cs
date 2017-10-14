@@ -4,6 +4,8 @@ using Microsoft.Bot.Connector;
 using System;
 using Newtonsoft.Json;
 
+// Now Dialogflow.com
+
 namespace RecipyBotWeb.Service
 {
     public class ApiAiService

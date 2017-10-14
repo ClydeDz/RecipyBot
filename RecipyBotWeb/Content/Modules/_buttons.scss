@@ -1,1 +1,51 @@
-﻿
+﻿/* VARIABLES */
+@import '_colours';
+@import '_animation';
+@import '_fonts';
+
+
+@mixin generic-button($bg-color) {
+    @extend .transition-all;
+    background-color: $bg-color;
+    border: 0 solid transparent;
+    padding: 9px 18px;
+    border-radius: 30px;
+    outline: none;
+    text-decoration: none; 
+    margin-right: 9px;   
+}
+
+@mixin generic-button-hover($bg-color) {
+    background-color: $bg-color;
+    border: 0 solid transparent;
+    text-decoration: none;
+}
+
+
+.submit-button {
+    &:active, &:visited {
+        @include generic-button($normal-accent);
+    }    
+    &:hover, &:focus {
+        @include generic-button-hover(darken($normal-accent, 15%));
+    }
+}
+
+.getbot {
+    &:active, &:visited {
+        @include generic-button(white);
+        color: $social-blue;
+        border: 1px solid $social-blue;
+    } 
+
+    &:hover, &:focus {
+         @include generic-button-hover(white);
+         color: darken($social-blue, 10%);
+         border: 1px solid darken($social-blue, 10%);
+    }
+       
+    i {
+        position: relative;
+        top: 3px;
+    }
+}
