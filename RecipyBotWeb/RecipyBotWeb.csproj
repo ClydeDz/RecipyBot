@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -244,9 +245,6 @@
     <Content Include="Scripts\Modules\main.js" />
     <Content Include="Scripts\Vendor\bootstrap.js" />
     <Content Include="Scripts\Vendor\bootstrap.min.js" />
-    <Content Include="PrivateSettings.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Content\Modules\_colours.scss" />
     <Content Include="Content\Modules\_general.scss" />
     <Content Include="Content\Modules\_animation.scss" />
