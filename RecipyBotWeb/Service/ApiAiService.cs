@@ -55,23 +55,23 @@ namespace RecipyBotWeb.Service
 
                     // Returns a generic about response
                     case BotConstants.ApiAiActionConstants.GeneralAbout:
-                        return BotService.AboutResponse(message, response.Result.Fulfillment.Speech);
+                        return BotHelperService.AboutResponse(message, response.Result.Fulfillment.Speech);
 
                     // Returns a generic help/get started response
                     case BotConstants.ApiAiActionConstants.GeneralGetStarted:
-                        return BotService.GetStartedResponse(message, response.Result.Fulfillment.Speech);
+                        return BotHelperService.GetStartedResponse(message, response.Result.Fulfillment.Speech);
 
                     // Returns a generic help/get started response
                     case BotConstants.ApiAiActionConstants.GeneralHelp:
-                        return BotService.GetStartedResponse(message, response.Result.Fulfillment.Speech);
+                        return BotHelperService.GetStartedResponse(message, response.Result.Fulfillment.Speech);
 
                     // Returns a generic version response
                     case BotConstants.ApiAiActionConstants.GeneralVersion:
-                        return BotService.VersionResponse(message);
+                        return BotHelperService.VersionResponse(message);
 
                     // Returns a generic feedback response
                     case BotConstants.ApiAiActionConstants.GeneralFeedback:
-                        return BotService.FeedbackResponse(message, response.Result.Fulfillment.Speech);
+                        return BotHelperService.FeedbackResponse(message, response.Result.Fulfillment.Speech);
                     
                     // Returns a response from API.AI for general smalltalk
                     case BotConstants.ApiAiActionConstants.GeneralSmallTalk:
