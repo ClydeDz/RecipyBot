@@ -7,37 +7,53 @@ namespace RecipyBotWeb.Service
 {
     public static class MiscService
     {
+        /// <summary>
+        /// Returns x numbers from the first y numbers.
+        /// For instance, if x is 2 and y is 5, this method returns
+        /// 2 numbers that are between 0 and 4.
+        /// If y is less than equal to 0, this method returns null.
+        /// If x is less than equal to y, this method returns x.
+        /// If x is greater than y, this method checks if -
+        /// Default Top N constant is less than equal to u, returns the constant
+        /// else returns y numbers.
+        /// </summary>
         public static IEnumerable<int> GiveXFromYNumbers(int x, int y)
         {
+            if (y <= 0)
+            {
+                return null;
+            }
+            int theseNumberOfItems = x <= y ? 
+                x :
+                BotConstants.OtherConstants.DefaultTopN <= y ?
+                    BotConstants.OtherConstants.DefaultTopN :
+                    y;
             List<int> rangeSet = new List<int>();
             for (int i=0; i<y; i++)
             {
                 rangeSet.Add(i);
             }
-            Random r = new Random();
-            return rangeSet.Shuffle().Take((x >= y ? BotConstants.OtherConstants.DefaultTopN : x)); //myValues.OrderBy(x => r.Next()).Take(3);            
+            return rangeSet.Shuffle().Take(theseNumberOfItems); 
         }
 
+        /// <summary>
+        /// Returns true if the supplied username isn't empty, null or
+        /// has the default value 'user' (case ignored).
+        /// </summary>
         public static bool IsUserNameDefaultOrBlank(string username)
         {
-            if (string.IsNullOrEmpty(username))
-            {
-                return false;
-            }
-            if (username.Equals("user", StringComparison.InvariantCultureIgnoreCase))
-            {
-                return false;
-            }
-            return true;
+            return string.IsNullOrEmpty(username) || username.Trim().Equals("user", StringComparison.InvariantCultureIgnoreCase);
         }
 
+        /// <summary>
+        /// Returns true if both string match each other.
+        /// Case is ignored. String are trimmed for whitespaces from both ends.
+        /// </summary>
         public static bool CompareTwoStrings(string a, string b)
         {
-            if (a.Trim().Equals(b.Trim(), StringComparison.InvariantCultureIgnoreCase))
-            {
-                return true;
-            }
-            return false;
+            return string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b) ?
+                false :
+                a.Trim().Equals(b.Trim(), StringComparison.InvariantCultureIgnoreCase);
         }
 
         public static string GetRandomTagline()
