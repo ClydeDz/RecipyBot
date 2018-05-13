@@ -37,7 +37,14 @@ namespace RecipyBotWeb.Constants
             public const string DefaultIngredientsSerialized = "Chicken, Carrots";
             public const string GifImgurKeyword = "i.imgur.com";
             public const int MaxOptionsGives = 3;
-
+            public static readonly string[] Taglines = { "Delicious and tempting", "Perfect for guests" };
+            public static readonly string[] Prefixes = {
+                "Made with",
+                "Ingredients:",
+                "Ingredients are",
+                "You will need"
+            };
+            public const string DefaultGifPlaceholder = "https://i.imgur.com/DpUg0ai.gif";
             public static string Version
             {
                 get { return ConfigurationManager.AppSettings["Bot:Version"]; }

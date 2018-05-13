@@ -56,50 +56,42 @@ namespace RecipyBotWeb.Service
                 a.Trim().Equals(b.Trim(), StringComparison.InvariantCultureIgnoreCase);
         }
 
+        /// <summary>
+        /// Randomly returns a tagline from the pre-defined list of taglines.
+        /// </summary>
         public static string GetRandomTagline()
         {
-            string[] taglines = new string[] {
-                "Delicious and tempting",
-                "Perfect for guests"
-            };
-            foreach (var tagline in taglines.Shuffle().Take(1))
-            {
-                return tagline.ToString();
-            }
-            return "";
+            return BotConstants.OtherConstants.Taglines.Shuffle().Take(1).FirstOrDefault().ToString();
         }
 
+        /// <summary>
+        /// Randomly returns one ingredient prefix from the list of
+        /// pre-defined prefixes.
+        /// </summary>
         public static string GetRandomIngredientsPrefix()
         {
-            string[] prefixes = new string[] {
-                "Made with",
-                "Ingredients:",
-                "Ingredients are",
-                "You will need"
-            };
-            foreach (var prefix in prefixes.Shuffle().Take(1))
-            {
-                return prefix.ToString() + " ";
-            }
-            return "";
+            return string.Format("{0} ", BotConstants.OtherConstants.Prefixes.Shuffle().Take(1).FirstOrDefault().ToString());
         }
 
+        /// <summary>
+        /// Returns the GIF video URL trimming the letter 'v' at the end.
+        /// </summary>
         public static string MakeGif(string gifUrl)
         {
-            return gifUrl.Substring(0, gifUrl.Length - 1);
+            return string.IsNullOrEmpty(gifUrl) ? "https://i.imgur.com/DpUg0ai.gif" : gifUrl.Substring(0, gifUrl.Length - 1);
         }
 
+        /// <summary>
+        /// Gets the numeric value from the supplied dictionary
+        /// where the key is 'number'.
+        /// Returns the default Top N number if no key is found or if its null.
+        /// </summary>
         public static int GetNumericEntity(Dictionary<string, object> paramters)
         {
-            int x = 0;
-            foreach (var j in paramters)
-            {
-                if (j.Key == BotConstants.ApiAiParametersConstants.Number)
-                {
-                    x = Convert.ToInt32(j.Value ?? BotConstants.OtherConstants.DefaultTopN);
-                }
-            }
-            return x;
+            var theNumber = paramters?.Where(p => p.Key == BotConstants.ApiAiParametersConstants.Number)
+                .Select(k => k.Value)
+                .FirstOrDefault();
+            return (theNumber == null) ? BotConstants.OtherConstants.DefaultTopN : Convert.ToInt32(theNumber);           
         }
 
         public static string GetFoodEntities(Dictionary<string, object> paramters)

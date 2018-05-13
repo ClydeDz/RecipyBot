@@ -130,5 +130,81 @@ namespace RecipyBot.Test.Service
             Assert.True(isInRange);
         }
 
+
+        // GetRandomTagline()
+                
+        [Fact()]
+        public void GetRandomTagline_ReturnExpectedStringAndNotNullOrEmpty_Test()
+        {
+            string result = MiscService.GetRandomTagline();
+            bool equalsExpectedString = false;
+            foreach (var tagline in BotConstants.OtherConstants.Taglines)
+            {
+                equalsExpectedString |= result.Equals(tagline, StringComparison.CurrentCultureIgnoreCase);
+            }
+            
+            Assert.NotNull(result);
+            Assert.True(equalsExpectedString);
+        }
+
+
+        // GetRandomIngredientsPrefix()
+
+        [Fact()]
+        public void GetRandomIngredientsPrefix_ReturnExpectedStringAndNotNullOrEmpty_Test()
+        {
+            string result = MiscService.GetRandomIngredientsPrefix();
+            bool equalsExpectedString = false;
+            foreach (var tagline in BotConstants.OtherConstants.Prefixes)
+            {
+                equalsExpectedString |= result.Equals(string.Format("{0} ", tagline), StringComparison.CurrentCultureIgnoreCase);
+            }
+
+            Assert.NotNull(result);
+            Assert.True(equalsExpectedString);
+        }
+
+
+        // MakeGif()
+
+        [Theory(DisplayName = "MakeGif_ReturnTrimmedStringAndNotNull_Test")]
+        [InlineData("https://i.imgur.com/DpUg0ai.gifv", "https://i.imgur.com/DpUg0ai.gif")]
+        [InlineData("https://i.imgur.com/m0CPOml.gifv", "https://i.imgur.com/m0CPOml.gif")]
+        [InlineData("", "https://i.imgur.com/DpUg0ai.gif")]
+        public void MakeGif_ReturnTrimmedStringAndNotNull_Test(string url, string expectedUrl)
+        {
+            Assert.NotNull(MiscService.MakeGif(url));
+            Assert.Equal(expectedUrl, MiscService.MakeGif(url));
+        }
+
+
+
+        // GetNumericEntity()
+        
+        [Fact()]
+        public void GetNumericEntity_ReturnsNumberFromDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("name", "John");
+            testParameters.Add("number", 5);
+
+            Assert.Equal(5, MiscService.GetNumericEntity(testParameters));
+        }
+        
+        [Fact()]
+        public void GetNumericEntity_ReturnsWhenNoNumberInDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("name", "John");
+            testParameters.Add("age", 23);
+
+            Assert.Equal(BotConstants.OtherConstants.DefaultTopN, MiscService.GetNumericEntity(testParameters));
+        }
+
+        [Fact()]
+        public void GetNumericEntity_ReturnsHandlesNullInput_Test()
+        {
+            Assert.Equal(BotConstants.OtherConstants.DefaultTopN, MiscService.GetNumericEntity(null));
+        }
     }
 }
