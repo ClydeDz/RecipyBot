@@ -8,6 +8,7 @@ namespace RecipyBot.Test.Service
 {
     public class MiscServiceTest
     {
+
         // CompareTwoStrings()
 
         [Theory(DisplayName = "CompareTwoStrings_ReturnsTrue_Test")]
@@ -176,8 +177,7 @@ namespace RecipyBot.Test.Service
             Assert.NotNull(MiscService.MakeGif(url));
             Assert.Equal(expectedUrl, MiscService.MakeGif(url));
         }
-
-
+        
 
         // GetNumericEntity()
         
@@ -205,6 +205,57 @@ namespace RecipyBot.Test.Service
         public void GetNumericEntity_ReturnsHandlesNullInput_Test()
         {
             Assert.Equal(BotConstants.OtherConstants.DefaultTopN, MiscService.GetNumericEntity(null));
+        }
+
+
+        // GetFoodEntities()
+
+        [Fact()]
+        public void GetFoodEntities_ReturnsFoodItemFromDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("foodItem", "Basil");
+            testParameters.Add("number", 5);
+
+            Assert.Equal("Basil", MiscService.GetFoodEntities(testParameters, BotConstants.FoodEntitiesEnum.FoodItem));
+        }
+
+        [Fact()]
+        public void GetFoodEntities_ReturnsRecipeItemFromDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("recipe", "Green salad with olives");
+            testParameters.Add("number", 5);
+
+            Assert.Equal("Green salad with olives", MiscService.GetFoodEntities(testParameters, BotConstants.FoodEntitiesEnum.Recipe));
+        }
+
+        [Theory(DisplayName = "GetFoodEntities_HandlesNull_Test")]
+        [InlineData(BotConstants.FoodEntitiesEnum.FoodItem, "Chicken, Carrots")]
+        [InlineData(BotConstants.FoodEntitiesEnum.Recipe, "Chicken soup")]
+        public void GetFoodEntities_HandlesNull_Test(BotConstants.FoodEntitiesEnum foodEntitiesEnum, string expectedOutput)
+        {
+            Assert.Equal(expectedOutput, MiscService.GetFoodEntities(null, foodEntitiesEnum));
+        }
+
+        [Fact()]
+        public void GetFoodEntities_ReturnsWhenNoFoodItemInDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("name", "John");
+            testParameters.Add("age", 23);
+
+            Assert.Equal(BotConstants.OtherConstants.DefaultIngredientsSerialized, MiscService.GetFoodEntities(testParameters, BotConstants.FoodEntitiesEnum.FoodItem));
+        }
+
+        [Fact()]
+        public void GetFoodEntities_ReturnsWhenNoRecipeInDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("name", "John");
+            testParameters.Add("age", 23);
+
+            Assert.Equal(BotConstants.OtherConstants.DefaultRecipeDish, MiscService.GetFoodEntities(testParameters, BotConstants.FoodEntitiesEnum.Recipe));
         }
     }
 }

@@ -21,12 +21,12 @@ namespace RecipyBotWeb.Service
                 {
                     // Returns the recipe for an item searched
                     case BotConstants.ApiAiActionConstants.RecipyCookFor:
-                        var entityRecipyCookFor = MiscService.GetFoodEntities(response.Result.Parameters);
+                        var entityRecipyCookFor = MiscService.GetFoodEntities(response.Result.Parameters, BotConstants.FoodEntitiesEnum.Recipe);
                         if (string.IsNullOrEmpty(entityRecipyCookFor))
                         {
                             return message.CreateReply(response.Result.Fulfillment.Speech);
                         }
-                        return RecipePuppyService.GetRecipeFor(message, MiscService.GetFoodEntities(response.Result.Parameters), response.Result.Fulfillment.Speech);
+                        return RecipePuppyService.GetRecipeFor(message, entityRecipyCookFor, response.Result.Fulfillment.Speech);
 
                     // Returns the recipe of the day
                     case BotConstants.ApiAiActionConstants.RecipyOfTheDay:
@@ -38,7 +38,7 @@ namespace RecipyBotWeb.Service
 
                     // Return a recipe for the ingredients queried
                     case BotConstants.ApiAiActionConstants.RecipyCookWith:
-                        var entityRecipyCookWith = MiscService.GetFoodEntities(response.Result.Parameters);
+                        var entityRecipyCookWith = MiscService.GetFoodEntities(response.Result.Parameters, BotConstants.FoodEntitiesEnum.FoodItem);
                         if (string.IsNullOrEmpty(entityRecipyCookWith))
                         {
                             return message.CreateReply(response.Result.Fulfillment.Speech);

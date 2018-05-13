@@ -94,21 +94,36 @@ namespace RecipyBotWeb.Service
             return (theNumber == null) ? BotConstants.OtherConstants.DefaultTopN : Convert.ToInt32(theNumber);           
         }
 
-        public static string GetFoodEntities(Dictionary<string, object> paramters)
+        /// <summary>
+        /// Returns food entity item from the supplied dictionary list
+        /// and the type of food entity item.
+        /// Returns the pre-defined food or recipe if none found in the supplied dictionary list.
+        /// </summary>
+        public static string GetFoodEntities(Dictionary<string, object> paramters, BotConstants.FoodEntitiesEnum foodEntitiesEnum)
         {
-            string foodItem = string.Empty;
+            if (paramters == null)
+            {
+                return foodEntitiesEnum == BotConstants.FoodEntitiesEnum.Recipe ?
+                    BotConstants.OtherConstants.DefaultRecipeDish :
+                    BotConstants.OtherConstants.DefaultIngredientsSerialized;
+            }
+
+            string foodItem = "";
             foreach (var j in paramters)
             {
-                if (j.Key == BotConstants.ApiAiParametersConstants.FoodItem)
+                if (j.Key == BotConstants.ApiAiParametersConstants.FoodItem && foodEntitiesEnum == BotConstants.FoodEntitiesEnum.FoodItem)
                 {
                     foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultIngredientsSerialized : j.Value.ToString();
                 }
-                if (j.Key == BotConstants.ApiAiParametersConstants.Recipe)
+                if (j.Key == BotConstants.ApiAiParametersConstants.Recipe && foodEntitiesEnum == BotConstants.FoodEntitiesEnum.Recipe)
                 {
                     foodItem = string.IsNullOrEmpty(j.Value.ToString()) ? BotConstants.OtherConstants.DefaultRecipeDish : j.Value.ToString();
                 }
             }
-            return foodItem;
+
+            return string.IsNullOrEmpty(foodItem) ? (foodEntitiesEnum == BotConstants.FoodEntitiesEnum.FoodItem ? BotConstants.OtherConstants.DefaultIngredientsSerialized :
+                BotConstants.OtherConstants.DefaultRecipeDish) :
+                foodItem;
         }
     }
 

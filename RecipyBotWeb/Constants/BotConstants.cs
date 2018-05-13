@@ -130,6 +130,12 @@ namespace RecipyBotWeb.Constants
             {
                 get { return ConfigurationManager.AppSettings["Bot:WebChatSecret"]; }
             }
-        }       
+        }
+        
+        public enum FoodEntitiesEnum
+        {
+            FoodItem,
+            Recipe
+        }
     }
 }
