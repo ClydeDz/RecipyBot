@@ -3,6 +3,7 @@ using RecipyBotWeb.Constants;
 using Microsoft.Bot.Connector;
 using System;
 using Newtonsoft.Json;
+using ApiAiSDK.Model;
 
 // Now Dialogflow.com
 
@@ -10,13 +11,15 @@ namespace RecipyBotWeb.Service
 {
     public class ApiAiService
     {
+        /// <summary>
+        /// Handles other non-pre-defined messages in the bot.
+        /// These messages are passed to the DialogFlow API to process.
+        /// </summary>
         public static Activity HandleNaturalInput(Activity message)
         {
             try
             {
-                var apiAi = new ApiAi(new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English));
-                var response = apiAi.TextRequest(message.Text);
-
+                var response = SendRequestToApiAi(message);
                 switch (response.Result.Action)
                 {
                     // Returns the recipe for an item searched
@@ -86,6 +89,15 @@ namespace RecipyBotWeb.Service
             {
                 return message.CreateReply("Oops, something happened " + e.Message);
             }
+        }
+
+        /// <summary>
+        /// Sends the message to the DialogFlow API.
+        /// </summary>
+        public static AIResponse SendRequestToApiAi(Activity message)
+        {
+            var apiAi = new ApiAi(new AIConfiguration(BotConstants.BotApiSettings.ApiAiClientAccessToken, SupportedLanguage.English));
+            return apiAi.TextRequest(message.Text);
         }
     }
 }

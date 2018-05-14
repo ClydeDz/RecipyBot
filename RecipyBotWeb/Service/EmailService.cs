@@ -9,17 +9,18 @@ namespace RecipyBotWeb.Service
 {
     public class EmailService
     {
+        /// <summary>
+        /// For the supplied contact us form model, this method creates
+        /// the message and sends it off to the send grid send method.
+        /// </summary>
         public static void SendContactForm(ContactUsDataModel c)
         {
             SendGridMessage msg = new SendGridMessage();
             msg.From = new EmailAddress(SiteSettingsConstant.GeneralFromEmail);
             msg.Subject = SiteSettingsConstant.ContactUsSubjectLine;
             msg.AddTo(SiteSettingsConstant.GeneralToEmail);
-
             StringBuilder sbtext = new StringBuilder();
             StringBuilder sbhtml = new StringBuilder();
-
-            // Can also use an HTML email template but I am keeping it simple
             sbhtml.Append("<h2>The Recipy Bot</h2><hr/><p>You have a new message from the Recipy Bot.</p><br/>");
 
             foreach (var property in c.GetType().GetProperties())
@@ -41,6 +42,9 @@ namespace RecipyBotWeb.Service
             SendMessage(msg).ConfigureAwait(false);
         }
 
+        /// <summary>
+        /// Send an email with the message supplied.
+        /// </summary>
         public static async Task SendMessage(SendGridMessage myMessage)
         {
             var client = new SendGridClient(SiteSettingsConstant.SendGridApiKey);

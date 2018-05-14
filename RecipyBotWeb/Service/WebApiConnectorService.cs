@@ -6,6 +6,10 @@ namespace RecipyBotWeb.Service
 {
     public class WebApiConnectorService
     {
+        /// <summary>
+        /// A generic GET request that returns the response
+        /// after sending a GET request to the URL specified.
+        /// </summary>
         public static T GenericGetRequest<T>(string url)
         {
             string result = string.Empty;

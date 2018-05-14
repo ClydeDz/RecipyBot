@@ -23,17 +23,26 @@ namespace RecipyBotWeb.Service
             {
                 return null;
             }
-            int theseNumberOfItems = x <= y ? 
-                x :
-                BotConstants.OtherConstants.DefaultTopN <= y ?
-                    BotConstants.OtherConstants.DefaultTopN :
-                    y;
+            int theseNumberOfItems = GetNumberOfItemsForGiveXFromYNumbers(x, y);
             List<int> rangeSet = new List<int>();
             for (int i=0; i<y; i++)
             {
                 rangeSet.Add(i);
             }
             return rangeSet.Shuffle().Take(theseNumberOfItems); 
+        }
+
+        /// <summary>
+        /// For the supplied x and y numeric values, this method decides
+        /// if it should return x, y or the default top N constant value.
+        /// </summary>
+        public static int GetNumberOfItemsForGiveXFromYNumbers(int x, int y)
+        {
+            return x <= y ?
+                x :
+                BotConstants.OtherConstants.DefaultTopN <= y ?
+                    BotConstants.OtherConstants.DefaultTopN :
+                    y;
         }
 
         /// <summary>
@@ -121,6 +130,14 @@ namespace RecipyBotWeb.Service
                 }
             }
 
+            return GetFoodEntitiesWhenFoodItemIsNull(foodItem, foodEntitiesEnum);
+        }
+
+        /// <summary>
+        /// Decides what string to return when foodItem is null or empty
+        /// </summary>
+        public static string GetFoodEntitiesWhenFoodItemIsNull(string foodItem, BotConstants.FoodEntitiesEnum foodEntitiesEnum)
+        {
             return string.IsNullOrEmpty(foodItem) ? (foodEntitiesEnum == BotConstants.FoodEntitiesEnum.FoodItem ? BotConstants.OtherConstants.DefaultIngredientsSerialized :
                 BotConstants.OtherConstants.DefaultRecipeDish) :
                 foodItem;

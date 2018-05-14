@@ -8,7 +8,6 @@ namespace RecipyBot.Test.Service
 {
     public class MiscServiceTest
     {
-
         // CompareTwoStrings()
 
         [Theory(DisplayName = "CompareTwoStrings_ReturnsTrue_Test")]
@@ -256,6 +255,34 @@ namespace RecipyBot.Test.Service
             testParameters.Add("age", 23);
 
             Assert.Equal(BotConstants.OtherConstants.DefaultRecipeDish, MiscService.GetFoodEntities(testParameters, BotConstants.FoodEntitiesEnum.Recipe));
+        }
+
+
+        // GetNumberOfItemsForGiveXFromYNumbers()
+
+        [Theory(DisplayName = "GetNumberOfItemsForGiveXFromYNumbers_ReturnsExpectedOutput_Test")]
+        [InlineData(1, 3, 1)]
+        [InlineData(7, 7, 7)]
+        [InlineData(9, 8, BotConstants.OtherConstants.DefaultTopN)]
+        [InlineData(9, 5, BotConstants.OtherConstants.DefaultTopN)]
+        [InlineData(8, 4, 4)]
+        [InlineData(0, 0, 0)]
+        public void GetNumberOfItemsForGiveXFromYNumbers_ReturnsExpectedOutput_Test(int x, int y, int expected)
+        {
+            Assert.Equal(expected, MiscService.GetNumberOfItemsForGiveXFromYNumbers(x, y));
+        }
+
+
+        // GetFoodEntitiesWhenFoodItemIsNull()
+
+        [Theory(DisplayName = "GetFoodEntitiesWhenFoodItemIsNull_ReturnsExpectedString_Test")]
+        [InlineData("", BotConstants.FoodEntitiesEnum.FoodItem, BotConstants.OtherConstants.DefaultIngredientsSerialized)]
+        [InlineData("", BotConstants.FoodEntitiesEnum.Recipe, BotConstants.OtherConstants.DefaultRecipeDish)]
+        [InlineData("jelly", BotConstants.FoodEntitiesEnum.FoodItem, "jelly")]
+        [InlineData("beans", BotConstants.FoodEntitiesEnum.Recipe, "beans")]
+        public void GetFoodEntitiesWhenFoodItemIsNull_ReturnsExpectedString_Test(string foodItem, BotConstants.FoodEntitiesEnum foodEntitiesEnum, string expected)
+        {
+            Assert.Equal(expected, MiscService.GetFoodEntitiesWhenFoodItemIsNull(foodItem, foodEntitiesEnum));
         }
     }
 }
