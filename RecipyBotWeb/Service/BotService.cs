@@ -70,7 +70,9 @@ namespace RecipyBotWeb.Service
             }
             catch(Exception e)
             {
-                return userMessage.CreateReply("Oops, something went wrong " + e.Message);
+                System.Diagnostics.Trace.TraceError("Class BotService | HandleBotRequest() | Oops, something happened " + e.Message);
+                System.Diagnostics.Trace.TraceError(e.StackTrace);
+                return userMessage.CreateReply("Gosh, this is embarrassing. Looks like we're having some trouble with that request. Maybe try sending a different request or try again later?");
             }                    
         }
 

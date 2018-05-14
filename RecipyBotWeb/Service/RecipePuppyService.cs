@@ -79,7 +79,7 @@ namespace RecipyBotWeb.Service
                 GifRecipesDataModel webResponse = WebApiConnectorService.GenericGetRequest<GifRecipesDataModel>(BotConstants.BotApiSettings.GifRecipes);
                 IEnumerable<int> randomNumbers = MiscService.GiveXFromYNumbers(1, webResponse.data.children.Where(p => p.data.domain == BotConstants.OtherConstants.GifImgurKeyword).Count());
 
-                Activity replyToConversation = message.CreateReply("thidtitlenls");
+                Activity replyToConversation = message.CreateReply("Here's your GIF recipe");
                 replyToConversation.Attachments = new List<Attachment>();
                 replyToConversation.AttachmentLayout = AttachmentLayoutTypes.List;
                 //replyToConversation.Text = "kjfjefkwek";
@@ -125,12 +125,12 @@ namespace RecipyBotWeb.Service
             }
             catch (NullReferenceException nex)
             {
-                Debug.WriteLine("GIF Recipes " + nex.Message);
+                System.Diagnostics.Trace.TraceError("GIF Recipes " + nex.Message);
                 return message.CreateReply("Apologies, we couldn't find any GIF recipes at this moment.");
             }
             catch (Exception e)
             {
-                Debug.WriteLine("GIF Recipes " + e.Message);
+                System.Diagnostics.Trace.TraceError("GIF Recipes " + e.Message);
                 return message.CreateReply("Apologies, we couldn't find any GIF recipes at this moment.");
             }
 
@@ -173,12 +173,12 @@ namespace RecipyBotWeb.Service
             }
             catch (NullReferenceException nex)
             {
-                Debug.WriteLine("GenerateRecipeMessage " + nex.Message);
+                System.Diagnostics.Trace.TraceError("GenerateRecipeMessage " + nex.Message);
                 return message.CreateReply("Apologies, we couldn't find any recipes at this moment.");
             }
             catch (Exception e)
             {
-                Debug.WriteLine("GenerateRecipeMessage " + e.Message);
+                System.Diagnostics.Trace.TraceError("GenerateRecipeMessage " + e.Message);
                 return message.CreateReply("Apologies, we couldn't find any GIF at this moment.");
             }
         }

@@ -30,12 +30,12 @@ namespace RecipyBotWeb.Service
             }
             catch (NullReferenceException nex)
             {
-                Debug.WriteLine("Flickr GetImage " + nex.Message);
+                System.Diagnostics.Trace.TraceError("Flickr GetImage " + nex.Message);
                 return "https://raw.githubusercontent.com/ClydeDz/RecipyBot/master/Docs/recipybot/2.png";
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Flickr GetImage " + e.Message);
+                System.Diagnostics.Trace.TraceError("Flickr GetImage " + e.Message);
                 return "https://raw.githubusercontent.com/ClydeDz/RecipyBot/master/Docs/recipybot/2.png";
             }
         }

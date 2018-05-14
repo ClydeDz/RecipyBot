@@ -185,11 +185,21 @@ namespace RecipyBot.Test.Service
         {
             Dictionary<string, object> testParameters = new Dictionary<string, object>();
             testParameters.Add("name", "John");
-            testParameters.Add("number", 5);
+            testParameters.Add("number", 3);
+
+            Assert.Equal(3, MiscService.GetNumericEntity(testParameters));
+        }
+
+        [Fact()]
+        public void GetNumericEntity_HandlesEmptyStringInNumberValueFromDictionary_Test()
+        {
+            Dictionary<string, object> testParameters = new Dictionary<string, object>();
+            testParameters.Add("name", "John");
+            testParameters.Add("number", "");
 
             Assert.Equal(5, MiscService.GetNumericEntity(testParameters));
         }
-        
+
         [Fact()]
         public void GetNumericEntity_ReturnsWhenNoNumberInDictionary_Test()
         {

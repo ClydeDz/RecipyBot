@@ -100,7 +100,7 @@ namespace RecipyBotWeb.Service
             var theNumber = paramters?.Where(p => p.Key == BotConstants.ApiAiParametersConstants.Number)
                 .Select(k => k.Value)
                 .FirstOrDefault();
-            return (theNumber == null) ? BotConstants.OtherConstants.DefaultTopN : Convert.ToInt32(theNumber);           
+            return (theNumber == null) || (string.IsNullOrEmpty(theNumber.ToString())) ? BotConstants.OtherConstants.DefaultTopN : Convert.ToInt32(theNumber);           
         }
 
         /// <summary>

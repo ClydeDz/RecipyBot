@@ -47,7 +47,7 @@ namespace RecipyBotWeb.Controllers
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("Contact page post exception message - " + e.Message);
+                    System.Diagnostics.Trace.TraceError("Contact page post exception message - " + e.Message);
                     return View("Error");
                 }
             }

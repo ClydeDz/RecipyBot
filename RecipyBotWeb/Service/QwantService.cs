@@ -29,12 +29,12 @@ namespace RecipyBotWeb.Service
             }
             catch (NullReferenceException nex)
             {
-                Debug.WriteLine("QwantService GetImage " + nex.Message);
+                System.Diagnostics.Trace.TraceError("QwantService GetImage " + nex.Message);
                 return "https://github.com/ClydeDz/RecipyBot/blob/master/Docs/recipybot/3.png";
             }
             catch (Exception e)
             {
-                Debug.WriteLine("QwantService GetImage " + e.Message);
+                System.Diagnostics.Trace.TraceError("QwantService GetImage " + e.Message);
                 return "https://github.com/ClydeDz/RecipyBot/blob/master/Docs/recipybot/3.png";
             }           
         }

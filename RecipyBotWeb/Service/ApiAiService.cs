@@ -4,6 +4,7 @@ using Microsoft.Bot.Connector;
 using System;
 using Newtonsoft.Json;
 using ApiAiSDK.Model;
+using System.Diagnostics;
 
 // Now Dialogflow.com
 
@@ -87,7 +88,9 @@ namespace RecipyBotWeb.Service
             }
             catch (Exception e)
             {
-                return message.CreateReply("Oops, something happened " + e.Message);
+                System.Diagnostics.Trace.TraceError("Class ApiAiService | HandleNaturalInput() | Oops, something happened " + e.Message);
+                System.Diagnostics.Trace.TraceError(e.StackTrace);
+                return message.CreateReply("Well, that's unexpected. Apologies, but looks like one of our systems is having some trouble digesting that request. Maybe try a differnt request or try again later?");
             }
         }
 
